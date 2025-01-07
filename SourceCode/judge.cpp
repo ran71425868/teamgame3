@@ -23,6 +23,6 @@ bool hitCheck(OBJ2D* obj1, OBJ2D* obj2) {
 
 void judge()
 {
-
     //”»’è
+
 }

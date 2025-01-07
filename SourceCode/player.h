@@ -12,10 +12,12 @@
 
 
 //プレイヤーの画像定義
-#define PLAYER_TEX_W                 180.0f
-#define PLAYER_TEX_H                 350.0f
-#define PLAYER_PIVOT_X               90.0f
-#define PLAYER_PIVOT_Y               175.0f
+#define PLAYER_TEX_W                 64.0f
+#define PLAYER_TEX_H                 128.0f
+#define PLAYER_PIVOT_X               32.0f
+#define PLAYER_PIVOT_Y               0.0f
+
+#define GRAVITY                     1.0f
 
 #define COOL_DOWN_MAX				3	
 
@@ -32,6 +34,9 @@
 #define WALL_RIGHT          PLAYER_TEX_W * 0.5f
 #define WALL_DOWN          SCREEN_H - PLAYER_TEX_H * 0.5f
 #define WALL_UP             PLAYER_TEX_H * 0.5f
+
+#define GROUND_Y                    1000.0f
+
 
 //------< 変数 >----------------------------------------------------------------
 

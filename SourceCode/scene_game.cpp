@@ -37,7 +37,7 @@ void game_update()
 	switch (game_state)
 	{
 	case 0:
-		sprBack = sprite_load(L"./Data/Images/map_04.png");
+		sprBack = sprite_load(L"./Data/Images/map_1.png");
 
 
 		audio_init();
@@ -69,11 +69,11 @@ void game_update()
 		break;
 	}
 
-	scrollValue -= 5;
+	/*scrollValue -= 5;
 	if (scrollValue < -9000)
 	{
 		scrollValue = 0;
-	}
+	}*/
 
 	game_timer++;
 }
