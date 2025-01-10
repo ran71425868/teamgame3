@@ -10,6 +10,7 @@
 
 #include "obj2d.h"
 #include "player.h"
+#include "boal.h"
 #include "judge.h"
 
 #include "scene_game.h"
