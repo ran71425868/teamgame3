@@ -143,6 +143,7 @@
     <ClCompile Include="GameLib\view_settings.cpp" />
     <ClCompile Include="GameLib\wnd_proc.cpp" />
     <ClCompile Include="SourceCode\audio.cpp" />
+    <ClCompile Include="SourceCode\boalcpp.cpp" />
     <ClCompile Include="SourceCode\common.cpp" />
     <ClCompile Include="SourceCode\goal.cpp" />
     <ClCompile Include="SourceCode\judge.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="GameLib\view_settings.h" />
     <ClInclude Include="SourceCode\all.h" />
     <ClInclude Include="SourceCode\audio.h" />
+    <ClInclude Include="SourceCode\boal.h" />
     <ClInclude Include="SourceCode\common.h" />
     <ClInclude Include="SourceCode\goal.h" />
     <ClInclude Include="SourceCode\judge.h" />
