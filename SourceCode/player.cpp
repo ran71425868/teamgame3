@@ -24,7 +24,7 @@ void player_init()
 {
     //player_stateÇ0
     player_state = 0;
-    player_angle = 0;
+    player_angle = 45.0f;
     player_angle2 = 0;
     player_angle3 = 0;
     player_angle4 = 0;
@@ -176,18 +176,26 @@ void player_moveX()
     //âEë´ÇëOÇ…ìÆÇ©Ç∑èàóù
     if (STATE(0) & PAD_LEFT && !(STATE(0) & PAD_RIGHT)) 
     {
-        player_angle2 += PLAYER_ACCEL_X;
+        player_angle2 += 1.0f;
+        player.speed.x -= PLAYER_ACCEL_X;
         if (player_angle2 > 60.0f)
             player_angle2 = 60.0f;
+        player_angle += PLAYER_ACCEL_Y;
+        if (player_angle > 90.0f)
+            player_angle = 90.0f;
 
     }
 
     //âEë´Çå„ÇÎÇ…ìÆÇ©Ç∑èàóù
     if (STATE(0) & PAD_RIGHT && !(STATE(0) & PAD_LEFT)) 
     {
-        player_angle2 -= PLAYER_ACCEL_X;
-        if (player_angle2 < -60.0f)
-            player_angle2 = -60.0f;
+        player.speed.x += PLAYER_ACCEL_X;
+        player_angle2 -= 1.0f;
+        if (player_angle2 < -90.0f)
+            player_angle2 = -90.0f;
+        player_angle -= PLAYER_ACCEL_Y;
+        if (player_angle < 0.0f)
+            player_angle = 0.0f;
 
     }
 
@@ -208,5 +216,26 @@ void player_moveX()
             player_angle4 = -60.0f;
 
     }
+    else {
+        if (player.speed.x > 0) {
+            player.speed.x -= PLAYER_DECEL_X;
+            if (player.speed.x < 0) {
+                player.speed.x = 0.0f;
+            }
+        }
+
+        if (player.speed.x < 0) {
+            player.speed.x += PLAYER_DECEL_X;
+            if (player.speed.x > 0) {
+                player.speed.x = 0.0f;
+            }
+        }
+
+    }
+    if (player.speed.x >= PLAYER_SPEED_X_MAX)
+        player.speed.x = PLAYER_SPEED_X_MAX;
+
+    if (player.speed.x <= -PLAYER_SPEED_X_MAX)
+        player.speed.x = -PLAYER_SPEED_X_MAX;
     debug::setString("player_angle:%f",player.angle);
 }
