@@ -144,6 +144,7 @@
     <ClCompile Include="GameLib\wnd_proc.cpp" />
     <ClCompile Include="SourceCode\audio.cpp" />
     <ClCompile Include="SourceCode\common.cpp" />
+    <ClCompile Include="SourceCode\goal.cpp" />
     <ClCompile Include="SourceCode\judge.cpp" />
     <ClCompile Include="SourceCode\main.cpp" />
     <ClCompile Include="SourceCode\OBJ2D.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="SourceCode\all.h" />
     <ClInclude Include="SourceCode\audio.h" />
     <ClInclude Include="SourceCode\common.h" />
+    <ClInclude Include="SourceCode\goal.h" />
     <ClInclude Include="SourceCode\judge.h" />
     <ClInclude Include="SourceCode\obj2d.h" />
     <ClInclude Include="SourceCode\player.h" />
