@@ -83,6 +83,7 @@ void player_update()
 
         // 位置に速度を足す
         player.pos += player.speed;
+        player.pivot.y -= GRAVITY;
 
         // プレイヤーの上下左右のエリアチェック
         if (player.pos.x < 100 + WALL_RIGHT) {
@@ -92,17 +93,11 @@ void player_update()
             player.pos.x = WALL_LEFT - 100;
         }
 
-        /*if (player.pos.y + sinf(ToRadian(player_angle+90.0))*128.0f > WALL_DOWN) {
-            player.pos.y = WALL_DOWN;
-        }*/
-
-        if (player.pos.y+640.0f > GROUND_Y) {
-            player.pos.y = GROUND_Y-640.0f;
-            if (player_angle > 20.0f) {
-               
-            }
+        if (player.pos.y > GROUND_Y) {
+            player.pos.y = GROUND_Y;
+            
         }
-       
+        
         break;
     }
 }
@@ -112,7 +107,7 @@ void player_render()
     //プレイヤーの描画
     sprite_render(sprPlayer, player.pos.x , player.pos.y , player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
         ToRadian(player_angle), player.color.x, player.color.y); 
-    sprite_render(sprPlayer, player.pos.x+cosf(ToRadian(player_angle+90.0))*128.0f, player.pos.y + sinf(ToRadian(player_angle+90.0))*128.0f, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
+    sprite_render(sprPlayer, player.pos.x+cosf(ToRadian(player_angle+90.0))*128.0f, player.pos.y+ sinf(ToRadian(player_angle+90.0))*128.0f, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
         ToRadian(player_angle2), player.color.x, player.color.y);
 
     sprite_render(sprPlayer, player.pos.x+100, player.pos.y, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
@@ -127,6 +122,7 @@ void player_render()
 
 void player_moveY()
 {
+    
     //重力
     player.speed.y += GRAVITY;
 
@@ -177,25 +173,20 @@ void player_moveX()
     if (STATE(0) & PAD_LEFT && !(STATE(0) & PAD_RIGHT)) 
     {
         player_angle2 += 1.0f;
-        player.speed.x -= PLAYER_ACCEL_X;
-        if (player_angle2 > 60.0f)
-            player_angle2 = 60.0f;
-        player_angle += PLAYER_ACCEL_Y;
-        if (player_angle > 90.0f)
-            player_angle = 90.0f;
+        //player.speed.x -= PLAYER_ACCEL_X;
+        if (player_angle2 > 40.0f)
+            player_angle2 = 40.0f;
 
     }
 
     //右足を後ろに動かす処理
     if (STATE(0) & PAD_RIGHT && !(STATE(0) & PAD_LEFT)) 
     {
-        player.speed.x += PLAYER_ACCEL_X;
+        //player.speed.x += PLAYER_ACCEL_X;
         player_angle2 -= 1.0f;
         if (player_angle2 < -90.0f)
             player_angle2 = -90.0f;
-        player_angle -= PLAYER_ACCEL_Y;
-        if (player_angle < 0.0f)
-            player_angle = 0.0f;
+        
 
     }
 

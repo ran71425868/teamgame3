@@ -35,7 +35,7 @@
 #define WALL_DOWN          SCREEN_H - PLAYER_TEX_H * 0.5f
 #define WALL_UP             PLAYER_TEX_H * 0.5f
 
-#define GROUND_Y                    1000.0f
+#define GROUND_Y                    600.0f
 
 
 //------< •Ï” >----------------------------------------------------------------
