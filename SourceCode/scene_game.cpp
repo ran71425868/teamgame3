@@ -1,5 +1,12 @@
 #include "all.h"
 #include <sstream>
+#include <iostream>
+#include <conio.h>
+#include <thread>
+#include <chrono>
+
+using namespace std;
+
 
 int game_state;
 int game_timer;
@@ -52,7 +59,7 @@ void game_update()
 		GameLib::setBlendMode(Blender::BS_ALPHA);
 
 		music::play(0);
-		music::setVolume(0, 0.3f);
+		music::setVolume(0, 0.1f);
 
 		score = 0;
 
@@ -67,8 +74,10 @@ void game_update()
 
 		player_update();
 		boal_update();
-
+		
 		judge();
+		
+
 		break;
 	}
 

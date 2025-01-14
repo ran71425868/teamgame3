@@ -1,4 +1,10 @@
 #include "all.h"
+#include <iostream>
+#include <conio.h>
+#include <thread>
+#include <chrono>
+
+using namespace std;
 
 int player_state;
 
@@ -10,6 +16,8 @@ float player_angle2;
 float player_angle3;
 float player_angle4;
 
+float hizaPosX;
+float hizaPosY;
 extern float scrollValue;
 
 //OBJ2D型の変数playerを宣言
@@ -24,11 +32,10 @@ void player_init()
 {
     //player_stateを0
     player_state = 0;
-    player_angle = 45.0f;
+    player_angle = 0.0f;
     player_angle2 = 0;
     player_angle3 = 0;
     player_angle4 = 0;
-    
 }
 //--------------------------------------
 //  プレイヤーの終了処理
@@ -42,6 +49,8 @@ void player_deinit()
 //--------------------------------------
 //  プレイヤーの更新処理
 //--------------------------------------
+
+bool ground = false;
 void player_update()
 {
     switch (player_state)
@@ -83,7 +92,6 @@ void player_update()
 
         // 位置に速度を足す
         player.pos += player.speed;
-        player.pivot.y -= GRAVITY;
 
         // プレイヤーの上下左右のエリアチェック
         if (player.pos.x < 100 + WALL_RIGHT) {
@@ -93,11 +101,35 @@ void player_update()
             player.pos.x = WALL_LEFT - 100;
         }
 
-        if (player.pos.y > GROUND_Y) {
-            player.pos.y = GROUND_Y;
-            
-        }
+      /* if (player.pos.x + cosf(ToRadian(player_angle + 90.0)) * 128.0f > GROUND_Y && player.pos.y + sinf(ToRadian(player_angle + 90.0)) * 256.0f > GROUND_Y)
+        {
+            player.pos.x = player.pos.x + cosf(ToRadian(player_angle + 90.0)) * 128.0f;
+            player.pos.y = player.pos.y + sinf(ToRadian(player_angle + 90.0)) * 256.0f;
+        }*/
         
+
+        /*if (player.pos.y > GROUND_Y)
+        {
+            player.pos.y = GROUND_Y;
+        }*/
+       // 膝下の付け根座標
+       hizaPosX = player.pos.x + cosf(ToRadian(player_angle + 90.0)) * 128.0f;
+       hizaPosY = player.pos.y + sinf(ToRadian(player_angle + 90.0)) * 128.0f;
+       // 足先
+       float footX = hizaPosX + cosf(ToRadian(player_angle2 + 90.0)) * 128.0f;
+       float footY = hizaPosY + sinf(ToRadian(player_angle2 + 90.0)) * 128.0f;
+
+
+       if (footY > GROUND_Y)
+       {
+           ground = true;
+           player.speed.y = 0.0f;
+           //footY = GROUND_Y;
+       }
+       else
+       {
+           ground = false;
+       }
         break;
     }
 }
@@ -105,26 +137,29 @@ void player_update()
 void player_render()
 {
     //プレイヤーの描画
+    // 太もも
     sprite_render(sprPlayer, player.pos.x , player.pos.y , player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
         ToRadian(player_angle), player.color.x, player.color.y); 
-    sprite_render(sprPlayer, player.pos.x+cosf(ToRadian(player_angle+90.0))*128.0f, player.pos.y+ sinf(ToRadian(player_angle+90.0))*128.0f, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
+    // 膝下
+    sprite_render(sprPlayer, hizaPosX, hizaPosY, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
         ToRadian(player_angle2), player.color.x, player.color.y);
 
-    sprite_render(sprPlayer, player.pos.x+100, player.pos.y, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
+   /* sprite_render(sprPlayer, player.pos.x+100, player.pos.y, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
         ToRadian(player_angle3), player.color.x, player.color.y);
     sprite_render(sprPlayer, player.pos.x+100 + cosf(ToRadian(player_angle3 + 90.0)) * 128.0f, player.pos.y + sinf(ToRadian(player_angle3 + 90.0)) * 128.0f, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
-        ToRadian(player_angle4), player.color.x, player.color.y);
+        ToRadian(player_angle4), player.color.x, player.color.y);*/
 
     //primitive::rect(player.pos.x - 100, player.pos.y - 100, 200 * hp / 100, 15, 0, 0, ToRadian(0), 0, 1, 0);
 
-
+    primitive::circle({ player.pos.x + cosf(ToRadian(player_angle + 90.0)) * 128.0f,player.pos.y + sinf(ToRadian(player_angle + 90.0)) * 256.0f }, player.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f });
 }
 
 void player_moveY()
 {
     
     //重力
-    player.speed.y += GRAVITY;
+    if(!ground)
+        player.speed.y += GRAVITY;
 
     //任意の操作による移動
     //右太ももを上に動かす処理

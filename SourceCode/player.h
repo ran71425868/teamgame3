@@ -35,7 +35,7 @@
 #define WALL_DOWN          SCREEN_H - PLAYER_TEX_H * 0.5f
 #define WALL_UP             PLAYER_TEX_H * 0.5f
 
-#define GROUND_Y                    600.0f
+#define GROUND_Y                    1000.0f
 
 
 //------< •Ï” >----------------------------------------------------------------
@@ -52,6 +52,5 @@ void player_moveX();
 void player_moveY();
 
 void player_hp();
-
 
 #endif//PLAYER_H

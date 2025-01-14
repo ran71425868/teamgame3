@@ -10,4 +10,5 @@ void game_score();
 
 void game_clear();
 
+
 #endif//SCENE_GAME_H

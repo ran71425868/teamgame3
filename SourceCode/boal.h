@@ -17,10 +17,6 @@
 #define BOAL_PIVOT_X               112.5f
 #define BOAL_PIVOT_Y               112.5f
 
-#define GRAVITY                     1.0f
-
-
-#define GROUND_Y                    1000.0f
 
 
 //------< •Ï” >----------------------------------------------------------------
