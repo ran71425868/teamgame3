@@ -1,10 +1,4 @@
 #include "all.h"
-#include <iostream>
-#include <conio.h>
-#include <thread>
-#include <chrono>
-
-using namespace std;
 
 int player_state;
 
@@ -151,7 +145,7 @@ void player_render()
 
     //primitive::rect(player.pos.x - 100, player.pos.y - 100, 200 * hp / 100, 15, 0, 0, ToRadian(0), 0, 1, 0);
 
-    primitive::circle({ player.pos.x + cosf(ToRadian(player_angle + 90.0)) * 128.0f,player.pos.y + sinf(ToRadian(player_angle + 90.0)) * 256.0f }, player.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f });
+    //primitive::circle({ player.pos.x + cosf(ToRadian(player_angle + 90.0)) * 128.0f,player.pos.y + sinf(ToRadian(player_angle + 90.0)) * 256.0f }, player.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f });
 }
 
 void player_moveY()
@@ -263,5 +257,7 @@ void player_moveX()
 
     if (player.speed.x <= -PLAYER_SPEED_X_MAX)
         player.speed.x = -PLAYER_SPEED_X_MAX;
-    debug::setString("player_angle:%f",player.angle);
+
+    debug::setString("hizaPosX:%f", hizaPosX);
+    debug::setString("hizaPosY:%f", hizaPosY);
 }
