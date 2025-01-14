@@ -108,5 +108,22 @@ void boal_render()
     
     //primitive::rect(player.pos.x - 100, player.pos.y - 100, 200 * hp / 100, 15, 0, 0, ToRadian(0), 0, 1, 0);
 
-
+    primitive::circle(boal.pos,
+        boal.radius, { 1.7, 1.7 }, ToRadian(0), { 1, 0, 0, 0.2f }
+    );
 }
+
+//void moveBoal(OBJ2D* obj)
+//{
+//    obj->scale = { 0.5f, 0.5f };
+//    obj->color = { 1, 1, 1, 1 };
+//    obj->spr = boalData.spr;
+//    obj->texPos = boalData.texPos;
+//    obj->texSize = boalData.texSize;
+//    obj->pivot = boalData.pivot;
+//
+//
+//    ++obj->state;
+//
+//}
+
