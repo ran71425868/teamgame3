@@ -12,6 +12,10 @@ float player_angle4;
 
 float hizaPosX;
 float hizaPosY;
+
+float footPosX;
+float footPosY;
+
 extern float scrollValue;
 
 //OBJ2DŒ^‚Ì•Ï”player‚ðéŒ¾
@@ -113,6 +117,9 @@ void player_update()
        float footX = hizaPosX + cosf(ToRadian(player_angle2 + 90.0)) * 128.0f;
        float footY = hizaPosY + sinf(ToRadian(player_angle2 + 90.0)) * 128.0f;
 
+      footPosX = footX + cosf(ToRadian(player_angle2 - 90.0)) * 128.0f;
+      footPosY = footY + sinf(ToRadian(player_angle2 - 90.0)) * 128.0f;
+
 
        if (footY > GROUND_Y)
        {
@@ -125,6 +132,7 @@ void player_update()
            ground = false;
        }
         break;
+       
     }
 }
 
@@ -260,4 +268,7 @@ void player_moveX()
 
     debug::setString("hizaPosX:%f", hizaPosX);
     debug::setString("hizaPosY:%f", hizaPosY);
+
+    debug::setString("footPosX:%f", footPosX);
+    debug::setString("footPosY:%f", footPosY);
 }
