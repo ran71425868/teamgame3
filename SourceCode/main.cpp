@@ -5,30 +5,30 @@
 int curScene = SCENE_NONE;
 int nextScene = SCENE_TITLE;
 
-void setFullScreenMode()
-{
-	HWND hwnd = GetForegroundWindow();  // 現在のウィンドウを取得
-
-	// ウィンドウのスタイルを取得
-	LONG style = GetWindowLong(hwnd, GWL_STYLE);
-
-	// フルスクリーン設定
-	MONITORINFO mi = { sizeof(mi) };
-	if (GetMonitorInfo(MonitorFromWindow(hwnd, MONITOR_DEFAULTTOPRIMARY), &mi)) {
-		SetWindowLong(hwnd, GWL_STYLE, style & ~WS_OVERLAPPEDWINDOW);
-		SetWindowPos(hwnd, HWND_TOP,
-			mi.rcMonitor.left, mi.rcMonitor.top,
-			mi.rcMonitor.right - mi.rcMonitor.left,
-			mi.rcMonitor.bottom - mi.rcMonitor.top,
-			SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
-	}
-}
+//void setFullScreenMode()
+//{
+//	HWND hwnd = GetForegroundWindow();  // 現在のウィンドウを取得
+//
+//	// ウィンドウのスタイルを取得
+//	LONG style = GetWindowLong(hwnd, GWL_STYLE);
+//
+//	// フルスクリーン設定
+//	MONITORINFO mi = { sizeof(mi) };
+//	if (GetMonitorInfo(MonitorFromWindow(hwnd, MONITOR_DEFAULTTOPRIMARY), &mi)) {
+//		SetWindowLong(hwnd, GWL_STYLE, style & ~WS_OVERLAPPEDWINDOW);
+//		SetWindowPos(hwnd, HWND_TOP,
+//			mi.rcMonitor.left, mi.rcMonitor.top,
+//			mi.rcMonitor.right - mi.rcMonitor.left,
+//			mi.rcMonitor.bottom - mi.rcMonitor.top,
+//			SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+//	}
+//}
 
 // WinMain 関数を記述する
 int APIENTRY wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int) {
 	//ゲームライブラリの初期設定
 	GameLib::init(L"Skiing in Escape", SCREEN_W, SCREEN_H);
-	setFullScreenMode();
+	//setFullScreenMode();
 
 	audio_init();
 	//ゲームループ
