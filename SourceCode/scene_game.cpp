@@ -38,7 +38,8 @@ void game_init() {
 void game_deinit() {
 	music::stop(0);
 	player_deinit();
-	boal_deinit();
+	player_deinit();
+	goal_deinit();
 }
 void game_update()
 {
@@ -51,6 +52,7 @@ void game_update()
 		audio_init();
 		player_init();
 		boal_init();
+		goal_init();
 
 		game_state++;
 		/*fallthrough*/
@@ -74,6 +76,7 @@ void game_update()
 
 		player_update();
 		boal_update();
+		goal_update();
 		
 		judge();
 		
@@ -95,6 +98,7 @@ void game_render() {
 
 	player_render();
 	boal_render();
+	goal_render();
 
 	text_out(0, "score", 1700, 450, 2, 2);
 	text_out(0, std::to_string(score), 1700, 500, 2, 2);

@@ -29,18 +29,18 @@ goalData[] = {
 struct GOAL_SET {
     int             goalType;
     VECTOR2         pos;
-}enemySet[] = {
+}goalSet[] = {
     { 0, { 1000, 600 }},
     { 0, { 950, 600 }},
-    {0, { 1200, 600 }},
-    {0, { 1200, 600 }},
-    {0, { 950, 600 }},
-    {0, { 700, 600 }},
-    {0, { 1200, 600 }},
-    {0, { 950, 600 }},
-    {0, { 700, 600 }},
-    {1, { 1000, 600}},
-    {2, { 1200, 600}},
+    { 0, { 1200, 600 }},
+    { 0, { 1200, 600 }},
+    { 0, { 950, 600 }},
+    { 0, { 700, 600 }},
+    { 0, { 1200, 600 }},
+    { 0, { 950, 600 }},
+    { 0, { 700, 600 }},
+    { 1, { 1000, 600}},
+    { 2, { 1200, 600}},
     { -1, { -1,  -1 }},
 };
 
@@ -65,11 +65,49 @@ void goal_deinit()
 
 void goal_update()
 {
-  
+    switch (goal_state)
+    {
+    case 0:
+    {
+        int dataNum = sizeof(goalData) / sizeof(GOAL_DATA);
+
+
+        for (int i = 0; i < dataNum; ++i) {
+            goalData[i].spr = sprite_load(goalData[i].filePath);
+
+        }
+    }
+
+    ++goal_state;
+
+    case 1:
+
+        for (int i = 0; i < GOAL_MAX; ++i) {
+            goal[i] = {};
+            goal[i].moveAlg = -1;
+        }
+
+        for (int i = 0; goalSet[i].goalType >= 0; i++) {
+            OBJ2D* p = searchSet0(goal, GOAL_MAX, goalSet[i].goalType, goalSet[i].pos);
+            if (!p)break;
+        }
+        ++goal_state;
+
+    case 2:
+       
+        for (int i = 0; i < GOAL_MAX; ++i) {
+
+        
+
             switch (goal[i].moveAlg) {
             case 0: moveGoal0(&goal[i]); break;
             }
- 
+          
+        }
+
+        break;
+
+    }
 }
 void goal_render() {
     for (int i = 0; i < GOAL_MAX; ++i)
