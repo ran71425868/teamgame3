@@ -29,6 +29,8 @@ void boal_deinit();
 void boal_update();
 void boal_render();
 
+
+
 void boal_moveX();
 void boal_moveY();
 

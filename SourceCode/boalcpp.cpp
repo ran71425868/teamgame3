@@ -113,17 +113,5 @@ void boal_render()
     );
 }
 
-//void moveBoal(OBJ2D* obj)
-//{
-//    obj->scale = { 0.5f, 0.5f };
-//    obj->color = { 1, 1, 1, 1 };
-//    obj->spr = boalData.spr;
-//    obj->texPos = boalData.texPos;
-//    obj->texSize = boalData.texSize;
-//    obj->pivot = boalData.pivot;
-//
-//
-//    ++obj->state;
-//
-//}
+
 
