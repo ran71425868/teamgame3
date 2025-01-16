@@ -16,6 +16,9 @@ float hizaPosY;
 float footPosX;
 float footPosY;
 
+float hizaX;
+float hizaY;
+
 extern float scrollValue;
 
 //OBJ2DŒ^‚Ì•Ï”player‚ðéŒ¾
@@ -117,20 +120,28 @@ void player_update()
        float footX = hizaPosX + cosf(ToRadian(player_angle2 + 90.0)) * 128.0f;
        float footY = hizaPosY + sinf(ToRadian(player_angle2 + 90.0)) * 128.0f;
 
-      footPosX = footX + cosf(ToRadian(player_angle2 - 90.0)) * 128.0f;
-      footPosY = footY + sinf(ToRadian(player_angle2 - 90.0)) * 128.0f;
+       footPosX = footX + cosf(ToRadian(player_angle2 - 90.0)) * 128.0f;
+       footPosY = footY + sinf(ToRadian(player_angle2 - 90.0)) * 128.0f;
 
+       hizaX=footPosX + cosf(ToRadian(player_angle - 90.0)) * 128.0f;
+       hizaY=footPosY + sinf(ToRadian(player_angle - 90.0)) * 128.0f;
 
        if (footY > GROUND_Y)
        {
            ground = true;
            player.speed.y = 0.0f;
-           //footY = GROUND_Y;
+           footY = GROUND_Y;
        }
        else
        {
            ground = false;
        }
+
+       hizaPosX = footX + cosf(ToRadian(player_angle2 - 90.0)) * 128.0f;
+       hizaPosY = footY + sinf(ToRadian(player_angle2 - 90.0)) * 128.0f;
+
+
+
         break;
        
     }
@@ -151,7 +162,7 @@ void player_render()
     sprite_render(sprPlayer, player.pos.x+100 + cosf(ToRadian(player_angle3 + 90.0)) * 128.0f, player.pos.y + sinf(ToRadian(player_angle3 + 90.0)) * 128.0f, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
         ToRadian(player_angle4), player.color.x, player.color.y);*/
 
-    //primitive::rect(player.pos.x - 100, player.pos.y - 100, 200 * hp / 100, 15, 0, 0, ToRadian(0), 0, 1, 0);
+    primitive::rect(0,GROUND_Y, 1280, 80,0,0, ToRadian(0), 0, 1, 0);
 
     //primitive::circle({ player.pos.x + cosf(ToRadian(player_angle + 90.0)) * 128.0f,player.pos.y + sinf(ToRadian(player_angle + 90.0)) * 256.0f }, player.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f });
 }
