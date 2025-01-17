@@ -57,7 +57,7 @@ void boal_update()
         boal.texSize = { BOAL_TEX_W ,BOAL_TEX_H };
         boal.pivot = { BOAL_PIVOT_X,BOAL_PIVOT_Y };
         boal.color = { 1.0f,1.0f,1.0f,1.0f };
-        boal.radius = 20.0f;
+        boal.radius = 34.0f;
         boal.offset = { 0,0 };
 
        
@@ -112,7 +112,7 @@ void boal_render()
     //primitive::rect(player.pos.x - 100, player.pos.y - 100, 200 * hp / 100, 15, 0, 0, ToRadian(0), 0, 1, 0);
 
     primitive::circle(boal.pos,
-        boal.radius, { 1.7, 1.7 }, ToRadian(0), { 1, 0, 0, 0.2f }
+        boal.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f }
     );
 }
 void boal_moveX()
