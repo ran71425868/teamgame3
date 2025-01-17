@@ -13,6 +13,7 @@ void goal_deinit();
 void goal_update();
 void goal_render();
 void moveGoal0(OBJ2D* obj);
+void moveGoal1(OBJ2D* obj);
 
 
 

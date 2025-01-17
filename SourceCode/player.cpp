@@ -29,6 +29,12 @@ extern float scrollValue;
 //OBJ2D型の変数playerを宣言
 OBJ2D player;
 
+Sprite* sprBody;
+Sprite* sprLeftArm;
+Sprite* sprRightArm;
+Sprite* sprThighs;
+Sprite* sprLeftLeg;
+Sprite* sprRightLeg;
 Sprite* sprPlayer;
 
 //--------------------------------------
@@ -66,6 +72,8 @@ void player_update()
 
         //プレイヤーの画像を読み込み
         sprPlayer = sprite_load(L"./Data/Images/3.png");
+        sprRightLeg = sprite_load(L"./Data/Images/right_leg.png");
+        sprThighs = sprite_load(L"./Data/Images/thighs.png");
 
         ++player_state;
         /*fallthrough*/
@@ -77,7 +85,7 @@ void player_update()
         player = {};
         player.timer = 0;
         player.pos = { SCREEN_W * 0.5f,SCREEN_H * 0.5f };
-        player.scale = { 1.0f,1.0f };
+        player.scale = { 0.25f,0.25f };
         player.texPos = { 0,0 };
         player.texSize = { PLAYER_TEX_W ,PLAYER_TEX_H };
         player.pivot = { PLAYER_PIVOT_X,PLAYER_PIVOT_Y };
@@ -146,10 +154,10 @@ void player_render()
 {
     //プレイヤーの描画
     // 太もも
-    sprite_render(sprPlayer, player.pos.x , player.pos.y , player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
+    sprite_render(sprThighs, player.pos.x , player.pos.y , player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
         ToRadian(player_angle), player.color.x, player.color.y); 
     // 膝下
-    sprite_render(sprPlayer, right_knee_PosX, right_knee_PosY, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
+    sprite_render(sprRightLeg, right_knee_PosX, right_knee_PosY, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
         ToRadian(player_angle2), player.color.x, player.color.y);
 
     /*sprite_render(sprPlayer, player.pos.x+100, player.pos.y, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
