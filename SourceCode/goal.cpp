@@ -14,7 +14,7 @@ struct GOAL_DATA {
 goalData[] = {
 { NULL,   L"./Data/Images/01.png", { 0, 0 }, { 229, 239 }, { 114.5, 119.5 }, 45},
 { NULL,   L"./Data/Images/02.png", { 0, 0 }, { 227, 239 }, { 113.5, 119.5 }, 45},
-{ NULL,   L"./Data/Images/03.png", { 0, 0 }, { 228, 239 }, { 114, 229.5 }, 45},
+{ NULL,   L"./Data/Images/03.png", { 0, 0 }, { 228, 239 }, { 114, 119.5 }, 45},
 { NULL,   L"./Data/Images/04.png", { 0, 0 }, { 229, 240 }, { 114.5, 120 }, 45},
 { NULL,   L"./Data/Images/05.png", { 0, 0 }, { 229, 238 }, { 114.5, 119 }, 45},
 { NULL,   L"./Data/Images/06.png", { 0, 0 }, { 228, 238 }, { 114, 119 }, 45},
@@ -71,6 +71,9 @@ void goal_update()
             goalData[i].spr = sprite_load(goalData[i].filePath);
 
         }
+
+
+
     }
 
     ++goal_state;
@@ -80,6 +83,11 @@ void goal_update()
         for (int i = 0; i < GOAL_MAX; ++i) {
             goal[i] = {};
             goal[i].moveAlg = -1;
+
+            goal[i].spr = goalData[i].spr;
+            goal[i].texPos = goalData[i].texPos;
+            goal[i].texSize = goalData[i].texSize;
+            goal[i].pivot = goalData[i].pivot;
         }
 
         for (int i = 0; goalSet[i].goalType >= 0; i++) {
@@ -90,18 +98,21 @@ void goal_update()
 
     case 2:
        
+#if false
         for (int i = 0; i < GOAL_MAX; ++i) {
 
             if (goal[i].moveAlg == -1)continue;
 
 
             switch (goal[i].moveAlg) {
+
             case 0: moveGoal0(&goal[i]); break;
                 
                 case 1: moveGoal1(&goal[i]); break;
             }
           
         }
+#endif
 
         break;
 
@@ -115,13 +126,12 @@ void goal_render() {
         sprite_render(
             goal[i].spr,
             goal[i].pos.x, goal[i].pos.y,
-            goal[i].scale.x, goal[i].scale.y,
+            0.6f, 0.6f,
             goal[i].texPos.x, goal[i].texPos.y,
             goal[i].texSize.x, goal[i].texSize.y,
             goal[i].pivot.x, goal[i].pivot.y,
             ToRadian(0),
-            goal[i].color.x, goal[i].color.y,
-            goal[i].color.z, goal[i].color.w
+            1,1,1,1
         );
 
     }
@@ -135,15 +145,15 @@ void moveGoal0(OBJ2D* obj)
 
         obj->scale = { 0.6f,0.6f };
         obj->color = { 1,1,1,1 };
-        obj->spr = goalData[5].spr;
+        obj->spr = goalData[0].spr;
         obj->texPos = goalData[0].texPos;
         obj->texSize = goalData[0].texSize;
         obj->pivot = goalData[0].pivot;
         obj->radius = goalData[0].radius;
 
-        ++obj->state;
+        //++obj->state;
 
-    case 1:
+    //case 1:
         break;
 
     }
@@ -160,8 +170,8 @@ void moveGoal0(OBJ2D* obj)
             obj->pivot = goalData[1].pivot;
             obj->radius = goalData[1].radius;
 
-            ++obj->state;
-        case 1:
+        //    ++obj->state;
+        //case 1:
 
             break;
         }
