@@ -26,11 +26,6 @@ bool hitCheck(OBJ2D* obj1, OBJ2D* obj2) {
 void judge()
 {
     //îªíË
-
-}
-//ÉSÅ[Éã
-void goaljudge()
-{
     for (int i = 0; i < GOAL_MAX; ++i) {
         if (goal[i].moveAlg == -1) continue;
         
@@ -47,4 +42,9 @@ void goaljudge()
             }*/
         }
     }
+}
+//ÉSÅ[Éã
+void goaljudge()
+{
+    
 }

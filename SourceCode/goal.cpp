@@ -119,7 +119,7 @@ void goal_render() {
             1,1,1,1
         );
         primitive::circle(goal[i].pos,
-        goalData[0].radius, {1, 1}, ToRadian(0), {1, 0, 0, 0.2f}
+        goalData[i].radius, {1, 1}, ToRadian(0), {1, 0, 0, 0.2f}
     );
     }
 }
