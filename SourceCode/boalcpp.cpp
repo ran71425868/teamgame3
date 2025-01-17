@@ -119,7 +119,8 @@ void boal_moveX()
 {
     if (STATE(0) & PAD_LEFT && !(STATE(0) & PAD_RIGHT))
     {
-        boal.pos.x += 0.05;
+        //boal.pos.x += 0.05;
+        boal.pos.x -= 0.5;
 
     }
     if (STATE(0) & PAD_RIGHT && !(STATE(0) & PAD_LEFT))
@@ -129,7 +130,13 @@ void boal_moveX()
 }
 void boal_moveY()
 {
+    if (STATE(0) & PAD_UP && !(STATE(0) & PAD_DOWN))
+    {
+        boal.pos.y -= 1;
 
+
+
+    }
 
 }
 
