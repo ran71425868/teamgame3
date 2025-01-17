@@ -146,22 +146,3 @@ void moveGoal0(OBJ2D* obj)
     }
 }
 
-    void moveGoal1(OBJ2D * obj) {
-        switch (obj->state) {
-        case 0:
-            obj->scale = { 0.6f,0.6f };
-            obj->color = { 1,1,1,1 };
-            obj->spr = goalData[1].spr;
-            obj->texPos = goalData[1].texPos;
-            obj->texSize = goalData[1].texSize;
-            obj->pivot = goalData[1].pivot;
-            obj->radius = goalData[1].radius;
-
-        //    ++obj->state;
-        //case 1:
-
-            break;
-        }
-    }
-
-

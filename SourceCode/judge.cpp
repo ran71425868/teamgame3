@@ -37,11 +37,12 @@ void goaljudge()
         if (hitCheck(&boal, &goal[i]))
         {
             goal[i].moveAlg = -1;
+           
 
             //scene_reset();
-            if (&goal[i] == 0) {
-                //nextScene = SCENE_CLEAR;
-            }
+           /* if (&goal[i] == 0) {
+                nextScene = SCENE_CLEAR;
+            }*/
         }
     }
 }
