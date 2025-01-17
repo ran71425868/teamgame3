@@ -66,8 +66,8 @@ void boal_update()
         //////// ’Êí ////////
 
         //player_moveXEY‚ğŒÄ‚Ô
-        /*player_moveY();
-        player_moveX();*/
+        boal_moveY();
+        boal_moveX();
 
         // ˆÊ’u‚É‘¬“x‚ğ‘«‚·
         //player.pos += player.speed;
@@ -112,6 +112,14 @@ void boal_render()
         boal.radius, { 1.7, 1.7 }, ToRadian(0), { 1, 0, 0, 0.2f }
     );
 }
+void boal_moveX()
+{
 
+}
+void boal_moveY()
+{
+
+
+}
 
 
