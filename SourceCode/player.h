@@ -12,9 +12,9 @@
 
 
 //プレイヤーの画像定義
-#define PLAYER_TEX_W                 800.0f
-#define PLAYER_TEX_H                 800.0f
-#define PLAYER_PIVOT_X               400.0f
+#define PLAYER_TEX_W                 64.0f
+#define PLAYER_TEX_H                 128.0f
+#define PLAYER_PIVOT_X               40.0f
 #define PLAYER_PIVOT_Y               0.0f
 
 #define GRAVITY                     1.0f

@@ -5,6 +5,12 @@ int player_state;
 int scroll_position_X;
 int scroll_position_Y;
 
+//腰
+float right_waistX;
+float right_waistY;
+float left_waistX;
+float left_waistY;
+
 //各足パーツの角度
 float player_angle;
 float player_angle2;
@@ -18,11 +24,12 @@ float right_knee_PosY;
 float left_knee_PosX;
 float left_knee_PosY;
 
-float footPosX;
-float footPosY;
-
-float hizaX;
-float hizaY;
+//右足
+float right_foot_PosX;
+float right_foot_PosY;
+//左足
+float left_foot_PosX;
+float left_foot_PosY;
 
 extern float scrollValue;
 
@@ -72,6 +79,7 @@ void player_update()
 
         //プレイヤーの画像を読み込み
         sprPlayer = sprite_load(L"./Data/Images/3.png");
+        sprLeftLeg = sprite_load(L"./Data/Images/left_leg.png");
         sprRightLeg = sprite_load(L"./Data/Images/right_leg.png");
         sprThighs = sprite_load(L"./Data/Images/thighs.png");
 
@@ -85,7 +93,7 @@ void player_update()
         player = {};
         player.timer = 0;
         player.pos = { SCREEN_W * 0.5f,SCREEN_H * 0.5f };
-        player.scale = { 0.25f,0.25f };
+        player.scale = { 1.0f,1.0f };
         player.texPos = { 0,0 };
         player.texSize = { PLAYER_TEX_W ,PLAYER_TEX_H };
         player.pivot = { PLAYER_PIVOT_X,PLAYER_PIVOT_Y };
@@ -100,6 +108,13 @@ void player_update()
     case 2:
         //////// 通常時 ////////
 
+        //腰にプレイヤーの位置を入れる
+        right_waistX = player.pos.x;
+        right_waistY = player.pos.y;
+
+        left_waistX = player.pos.x + 100;
+        left_waistY = player.pos.y;
+
         //player_moveX・Yを呼ぶ
         player_moveY();
         player_moveX();
@@ -107,27 +122,39 @@ void player_update()
         //位置に速度を足す
         player.pos += player.speed;
 
+        
+
        //膝・膝下の付け根座標
        //右足
-       right_knee_PosX = player.pos.x + cosf(ToRadian(player_angle + 90.0)) * 128.0f;
-       right_knee_PosY = player.pos.y + sinf(ToRadian(player_angle + 90.0)) * 128.0f;
+       right_knee_PosX = right_waistX + cosf(ToRadian(player_angle + 90.0)) * 128.0f;
+       right_knee_PosY = right_waistY + sinf(ToRadian(player_angle + 90.0)) * 128.0f;
+
        //左足
+       left_knee_PosX = left_waistX+ cosf(ToRadian(player_angle3 + 90.0)) * 128.0f;
+       left_knee_PosY = left_waistY+ sinf(ToRadian(player_angle3 + 90.0)) * 128.0f;
+
+       //足先
+       //右足
+       float right_footX = right_knee_PosX + cosf(ToRadian(player_angle2 + 90.0)) * 128.0f;
+       float right_footY = right_knee_PosY + sinf(ToRadian(player_angle2 + 90.0)) * 128.0f;
+
+       //左足
+       float left_footX = left_knee_PosX + cosf(ToRadian(player_angle4 + 90.0)) * 128.0f;
+       float left_footY = left_knee_PosY + sinf(ToRadian(player_angle4 + 90.0)) * 128.0f;
+
+       right_foot_PosX =right_footX + cosf(ToRadian(player_angle2 - 90.0)) * 128.0f;
+       right_foot_PosY =right_footY + sinf(ToRadian(player_angle2 - 90.0)) * 128.0f;
+
+       left_foot_PosX = left_footX + cosf(ToRadian(player_angle4 - 90.0)) * 128.0f;
+       left_foot_PosY = left_footY + sinf(ToRadian(player_angle4 - 90.0)) * 128.0f;
+
        
-       // 足先
-       float footX = right_knee_PosX + cosf(ToRadian(player_angle2 + 90.0)) * 128.0f;
-       float footY = right_knee_PosY + sinf(ToRadian(player_angle2 + 90.0)) * 128.0f;
-
-       footPosX = footX + cosf(ToRadian(player_angle2 - 90.0)) * 128.0f;
-       footPosY = footY + sinf(ToRadian(player_angle2 - 90.0)) * 128.0f;
-
-       /*hizaX = footPosX + cosf(ToRadian(player_angle - 90.0)) * 128.0f;
-       hizaY = footPosY + sinf(ToRadian(player_angle - 90.0)) * 128.0f;*/
-
-       if (footY > GROUND_Y)
+       if (right_footY > GROUND_Y || left_footY > GROUND_Y)
        {
            ground = true;
            player.speed.y = 0.0f;
-           footY = GROUND_Y;
+           right_footY = GROUND_Y;
+           left_footY = GROUND_Y;
        }
        else
        {
@@ -136,15 +163,24 @@ void player_update()
 
        //膝固定
        //右膝
-       right_knee_PosX = footX + cosf(ToRadian(player_angle2 - 90.0)) * 128.0f;
-       right_knee_PosY = footY + sinf(ToRadian(player_angle2 - 90.0)) * 128.0f;
+       right_knee_PosX = right_footX + cosf(ToRadian(player_angle2 - 90.0)) * 128.0f;
+       right_knee_PosY = right_footY + sinf(ToRadian(player_angle2 - 90.0)) * 128.0f;
 
-       footPosY = right_knee_PosY;
+       //左膝
+       left_knee_PosX = left_footX + cosf(ToRadian(player_angle4 - 90.0)) * 128.0f;
+       left_knee_PosY = left_footY + sinf(ToRadian(player_angle4 - 90.0)) * 128.0f;
 
-       player.pos.x = footPosX + cosf(ToRadian(player_angle - 90.0)) * 128.0f;
-       player.pos.y = footPosY + sinf(ToRadian(player_angle - 90.0)) * 128.0f;
+       right_foot_PosY = right_knee_PosY;
+       left_foot_PosY = left_knee_PosY;
+
+       //太もも固定
+       //右足
+       right_waistX = right_foot_PosX + cosf(ToRadian(player_angle - 90.0)) * 128.0f;
+       right_waistY = right_foot_PosY + sinf(ToRadian(player_angle - 90.0)) * 128.0f;
        
-
+       //左足
+       left_waistX = left_foot_PosX + cosf(ToRadian(player_angle3 - 90.0)) * 128.0f;
+       left_waistY = left_foot_PosY + sinf(ToRadian(player_angle3 - 90.0)) * 128.0f;
         break;
        
     }
@@ -153,17 +189,19 @@ void player_update()
 void player_render()
 {
     //プレイヤーの描画
-    // 太もも
-    sprite_render(sprThighs, player.pos.x , player.pos.y , player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
+    // 右太もも
+    sprite_render(sprThighs, right_waistX, right_waistY, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
         ToRadian(player_angle), player.color.x, player.color.y); 
-    // 膝下
+    // 右膝下
     sprite_render(sprRightLeg, right_knee_PosX, right_knee_PosY, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
         ToRadian(player_angle2), player.color.x, player.color.y);
 
-    /*sprite_render(sprPlayer, player.pos.x+100, player.pos.y, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
+    //左太もも
+    sprite_render(sprThighs, left_waistX, left_waistY, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
         ToRadian(player_angle3), player.color.x, player.color.y);
-    sprite_render(sprPlayer, player.pos.x+100 + cosf(ToRadian(player_angle3 + 90.0)) * 128.0f, player.pos.y + sinf(ToRadian(player_angle3 + 90.0)) * 128.0f, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
-        ToRadian(player_angle4), player.color.x, player.color.y);*/
+   //左膝下
+    sprite_render(sprLeftLeg, left_knee_PosX, left_knee_PosY, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
+        ToRadian(player_angle4), player.color.x, player.color.y);
 
     primitive::rect(0,GROUND_Y, 1920, 80,0,0, ToRadian(0), 0, 1, 0);
 
@@ -288,9 +326,4 @@ void player_moveX()
     if (player.speed.x <= -PLAYER_SPEED_X_MAX)
         player.speed.x = -PLAYER_SPEED_X_MAX;
 
-    debug::setString("hizaX:%f", hizaX);
-    debug::setString("hizaY:%f", hizaY);
-
-    debug::setString("playerPosX:%f", player.pos.x);
-    debug::setString("playerPosY:%f", player.pos.y);
 }
