@@ -1,6 +1,7 @@
 #include "all.h"
 
 extern OBJ2D player;
+extern OBJ2D goal[GOAL_MAX];
 
 //ìñÇΩÇËîªíË
 bool hitCheckCircle(VECTOR2 pos1, float r1, VECTOR2 pos2, float r2) {
@@ -25,4 +26,23 @@ void judge()
 {
     //îªíË
 
+}
+//ÉSÅ[Éã
+void goaljudge()
+{
+    for (int i = 0; i < GOAL_MAX; ++i) {
+        if (goal[i].moveAlg == -1) continue;
+        
+
+        if (hitCheck(&boal, &goal[i]))
+        {
+            goal[i].moveAlg = -1;
+           
+
+            //scene_reset();
+           /* if (&goal[i] == 0) {
+                nextScene = SCENE_CLEAR;
+            }*/
+        }
+    }
 }

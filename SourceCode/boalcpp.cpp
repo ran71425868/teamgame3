@@ -1,6 +1,8 @@
 #include "all.h"
 
+
 int boal_state;
+
 
 extern float scrollValue;
 
@@ -28,7 +30,7 @@ void boal_deinit()
 }
 
 //--------------------------------------
-//  プレイヤーの更新処理
+//  更新処理
 //--------------------------------------
 void boal_update()
 {
@@ -37,7 +39,7 @@ void boal_update()
     case 0:
         //////// 初期設定 ////////
 
-        //プレイヤーの画像を読み込み
+        //画像を読み込み
         sprBoal = sprite_load(L"./Data/Images/boal.png");
 
         ++boal_state;
@@ -49,15 +51,16 @@ void boal_update()
         //playerのパラメータ設定
         boal = {};
         boal.timer = 0;
-        boal.pos = { SCREEN_W * 0.5f,SCREEN_H * 0.5f };
+        boal.pos = { SCREEN_W * 0.3f, GROUND_Y - 30};
         boal.scale = { 0.5f,0.5f };
         boal.texPos = { 0,0 };
         boal.texSize = { BOAL_TEX_W ,BOAL_TEX_H };
         boal.pivot = { BOAL_PIVOT_X,BOAL_PIVOT_Y };
         boal.color = { 1.0f,1.0f,1.0f,1.0f };
-        boal.radius = 20.0f;
+        boal.radius = 34.0f;
         boal.offset = { 0,0 };
 
+       
 
         ++boal_state;
         /*fallthrough*/
@@ -90,14 +93,14 @@ void boal_update()
 
             }
         }*/
-
+        
         break;
     }
 }
 
 void boal_render()
 {
-    //プレイヤーの描画
+    //描画
     sprite_render(sprBoal,
         boal.pos.x, boal.pos.y,
         boal.scale.x, boal.scale.y,
@@ -109,16 +112,31 @@ void boal_render()
     //primitive::rect(player.pos.x - 100, player.pos.y - 100, 200 * hp / 100, 15, 0, 0, ToRadian(0), 0, 1, 0);
 
     primitive::circle(boal.pos,
-        boal.radius, { 1.7, 1.7 }, ToRadian(0), { 1, 0, 0, 0.2f }
+        boal.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f }
     );
 }
 void boal_moveX()
 {
+    if (STATE(0) & PAD_LEFT && !(STATE(0) & PAD_RIGHT))
+    {
+        //boal.pos.x += 0.05;
+        boal.pos.x -= 0.5;
 
+    }
+    if (STATE(0) & PAD_RIGHT && !(STATE(0) & PAD_LEFT))
+    {
+        boal.pos.x == 0;
+    }
 }
 void boal_moveY()
 {
+    if (STATE(0) & PAD_UP && !(STATE(0) & PAD_DOWN))
+    {
+        boal.pos.y -= 1;
 
+
+
+    }
 
 }
 
