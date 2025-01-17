@@ -5,13 +5,18 @@ int player_state;
 int scroll_position_X;
 int scroll_position_Y;
 
+//各足パーツの角度
 float player_angle;
 float player_angle2;
 float player_angle3;
 float player_angle4;
 
-float hizaPosX;
-float hizaPosY;
+//右膝
+float right_knee_PosX;
+float right_knee_PosY;
+//左膝
+float left_knee_PosX;
+float left_knee_PosY;
 
 float footPosX;
 float footPosY;
@@ -91,40 +96,24 @@ void player_update()
         player_moveY();
         player_moveX();
 
-        // 位置に速度を足す
+        //位置に速度を足す
         player.pos += player.speed;
 
-        // プレイヤーの上下左右のエリアチェック
-        if (player.pos.x < 100 + WALL_RIGHT) {
-            player.pos.x = 100 + WALL_RIGHT;
-        }
-        if (player.pos.x > WALL_LEFT - 100) {
-            player.pos.x = WALL_LEFT - 100;
-        }
-
-      /* if (player.pos.x + cosf(ToRadian(player_angle + 90.0)) * 128.0f > GROUND_Y && player.pos.y + sinf(ToRadian(player_angle + 90.0)) * 256.0f > GROUND_Y)
-        {
-            player.pos.x = player.pos.x + cosf(ToRadian(player_angle + 90.0)) * 128.0f;
-            player.pos.y = player.pos.y + sinf(ToRadian(player_angle + 90.0)) * 256.0f;
-        }*/
-        
-
-        /*if (player.pos.y > GROUND_Y)
-        {
-            player.pos.y = GROUND_Y;
-        }*/
-       // 膝下の付け根座標
-       hizaPosX = player.pos.x + cosf(ToRadian(player_angle + 90.0)) * 128.0f;
-       hizaPosY = player.pos.y + sinf(ToRadian(player_angle + 90.0)) * 128.0f;
+       //膝・膝下の付け根座標
+       //右足
+       right_knee_PosX = player.pos.x + cosf(ToRadian(player_angle + 90.0)) * 128.0f;
+       right_knee_PosY = player.pos.y + sinf(ToRadian(player_angle + 90.0)) * 128.0f;
+       //左足
+       
        // 足先
-       float footX = hizaPosX + cosf(ToRadian(player_angle2 + 90.0)) * 128.0f;
-       float footY = hizaPosY + sinf(ToRadian(player_angle2 + 90.0)) * 128.0f;
+       float footX = right_knee_PosX + cosf(ToRadian(player_angle2 + 90.0)) * 128.0f;
+       float footY = right_knee_PosY + sinf(ToRadian(player_angle2 + 90.0)) * 128.0f;
 
        footPosX = footX + cosf(ToRadian(player_angle2 - 90.0)) * 128.0f;
        footPosY = footY + sinf(ToRadian(player_angle2 - 90.0)) * 128.0f;
 
-       hizaX=footPosX + cosf(ToRadian(player_angle - 90.0)) * 128.0f;
-       hizaY=footPosY + sinf(ToRadian(player_angle - 90.0)) * 128.0f;
+       /*hizaX = footPosX + cosf(ToRadian(player_angle - 90.0)) * 128.0f;
+       hizaY = footPosY + sinf(ToRadian(player_angle - 90.0)) * 128.0f;*/
 
        if (footY > GROUND_Y)
        {
@@ -137,10 +126,16 @@ void player_update()
            ground = false;
        }
 
-       hizaPosX = footX + cosf(ToRadian(player_angle2 - 90.0)) * 128.0f;
-       hizaPosY = footY + sinf(ToRadian(player_angle2 - 90.0)) * 128.0f;
+       //膝固定
+       //右膝
+       right_knee_PosX = footX + cosf(ToRadian(player_angle2 - 90.0)) * 128.0f;
+       right_knee_PosY = footY + sinf(ToRadian(player_angle2 - 90.0)) * 128.0f;
 
+       footPosY = right_knee_PosY;
 
+       player.pos.x = footPosX + cosf(ToRadian(player_angle - 90.0)) * 128.0f;
+       player.pos.y = footPosY + sinf(ToRadian(player_angle - 90.0)) * 128.0f;
+       
 
         break;
        
@@ -154,15 +149,15 @@ void player_render()
     sprite_render(sprPlayer, player.pos.x , player.pos.y , player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
         ToRadian(player_angle), player.color.x, player.color.y); 
     // 膝下
-    sprite_render(sprPlayer, hizaPosX, hizaPosY, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
+    sprite_render(sprPlayer, right_knee_PosX, right_knee_PosY, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
         ToRadian(player_angle2), player.color.x, player.color.y);
 
-   /* sprite_render(sprPlayer, player.pos.x+100, player.pos.y, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
+    /*sprite_render(sprPlayer, player.pos.x+100, player.pos.y, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
         ToRadian(player_angle3), player.color.x, player.color.y);
     sprite_render(sprPlayer, player.pos.x+100 + cosf(ToRadian(player_angle3 + 90.0)) * 128.0f, player.pos.y + sinf(ToRadian(player_angle3 + 90.0)) * 128.0f, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
         ToRadian(player_angle4), player.color.x, player.color.y);*/
 
-    primitive::rect(0,GROUND_Y, 1280, 80,0,0, ToRadian(0), 0, 1, 0);
+    primitive::rect(0,GROUND_Y, 1920, 80,0,0, ToRadian(0), 0, 1, 0);
 
     //primitive::circle({ player.pos.x + cosf(ToRadian(player_angle + 90.0)) * 128.0f,player.pos.y + sinf(ToRadian(player_angle + 90.0)) * 256.0f }, player.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f });
 }
@@ -220,11 +215,19 @@ void player_moveX()
     //右足を前に動かす処理
     if (STATE(0) & PAD_LEFT && !(STATE(0) & PAD_RIGHT)) 
     {
+        scrollValue += 2;
         player_angle2 += 1.0f;
-        //player.speed.x -= PLAYER_ACCEL_X;
-        if (player_angle2 > 40.0f)
+        if (player_angle2 > 40.0f) 
+        {
             player_angle2 = 40.0f;
-
+            scrollValue -= 2;
+        }
+        if (player_angle <= 40.0f && player_angle2 > 0)
+        {
+            player_angle2 -= 1.0f;
+            scrollValue -= 2;
+        }
+           
     }
 
     //右足を後ろに動かす処理
@@ -277,9 +280,9 @@ void player_moveX()
     if (player.speed.x <= -PLAYER_SPEED_X_MAX)
         player.speed.x = -PLAYER_SPEED_X_MAX;
 
-    debug::setString("hizaPosX:%f", hizaPosX);
-    debug::setString("hizaPosY:%f", hizaPosY);
+    debug::setString("hizaX:%f", hizaX);
+    debug::setString("hizaY:%f", hizaY);
 
-    debug::setString("footPosX:%f", footPosX);
-    debug::setString("footPosY:%f", footPosY);
+    debug::setString("playerPosX:%f", player.pos.x);
+    debug::setString("playerPosY:%f", player.pos.y);
 }
