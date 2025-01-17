@@ -12,15 +12,15 @@ struct GOAL_DATA {
     float           radius;
 }
 goalData[] = {
-{ NULL,   L"./Data/Images/01.png", { 0, 0 }, { 229, 239 }, { 114.5, 119.5 }, 45},
-{ NULL,   L"./Data/Images/02.png", { 0, 0 }, { 227, 239 }, { 113.5, 119.5 }, 45},
-{ NULL,   L"./Data/Images/03.png", { 0, 0 }, { 228, 239 }, { 114, 119.5 }, 45},
-{ NULL,   L"./Data/Images/04.png", { 0, 0 }, { 229, 240 }, { 114.5, 120 }, 45},
-{ NULL,   L"./Data/Images/05.png", { 0, 0 }, { 229, 238 }, { 114.5, 119 }, 45},
-{ NULL,   L"./Data/Images/06.png", { 0, 0 }, { 228, 238 }, { 114, 119 }, 45},
-{ NULL,   L"./Data/Images/07.png", { 0, 0 }, { 226, 239 }, { 113, 119.5 }, 45},
-{ NULL,   L"./Data/Images/08.png", { 0, 0 }, { 226, 239 }, { 113, 119.5 }, 45},
-{ NULL,   L"./Data/Images/09.png", { 0, 0 }, { 227, 238 }, { 113.5, 119 }, 45},
+{ NULL,   L"./Data/Images/01.png", { 0, 0 }, { 229, 239 }, { 114.5, 119.5 }, 70},
+{ NULL,   L"./Data/Images/02.png", { 0, 0 }, { 227, 239 }, { 113.5, 119.5 }, 70},
+{ NULL,   L"./Data/Images/03.png", { 0, 0 }, { 228, 239 }, { 114,   119.5 }, 70},
+{ NULL,   L"./Data/Images/04.png", { 0, 0 }, { 229, 240 }, { 114.5, 120 },   70},
+{ NULL,   L"./Data/Images/05.png", { 0, 0 }, { 229, 238 }, { 114.5, 119 },   70},
+{ NULL,   L"./Data/Images/06.png", { 0, 0 }, { 228, 238 }, { 114,   119 },   70},
+{ NULL,   L"./Data/Images/07.png", { 0, 0 }, { 226, 239 }, { 113,   119.5 }, 70},
+{ NULL,   L"./Data/Images/08.png", { 0, 0 }, { 226, 239 }, { 113,   119.5 }, 70},
+{ NULL,   L"./Data/Images/09.png", { 0, 0 }, { 227, 238 }, { 113.5, 119 },   70},
 };
 
 
@@ -97,22 +97,7 @@ void goal_update()
         ++goal_state;
 
     case 2:
-       
-#if false
-        for (int i = 0; i < GOAL_MAX; ++i) {
-
-            if (goal[i].moveAlg == -1)continue;
-
-
-            switch (goal[i].moveAlg) {
-
-            case 0: moveGoal0(&goal[i]); break;
-                
-                case 1: moveGoal1(&goal[i]); break;
-            }
-          
-        }
-#endif
+ 
 
         break;
 
@@ -133,7 +118,9 @@ void goal_render() {
             ToRadian(0),
             1,1,1,1
         );
-
+        primitive::circle(goal[i].pos,
+        goalData[0].radius, {1, 1}, ToRadian(0), {1, 0, 0, 0.2f}
+    );
     }
 }
 void moveGoal0(OBJ2D* obj)
