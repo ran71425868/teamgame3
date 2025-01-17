@@ -2,6 +2,7 @@
 
 extern OBJ2D player;
 extern OBJ2D goal[GOAL_MAX];
+extern OBJ2D boal;
 
 //“–‚½‚è”»’è
 bool hitCheckCircle(VECTOR2 pos1, float r1, VECTOR2 pos2, float r2) {
@@ -36,6 +37,7 @@ void goaljudge()
 
         if (hitCheck(&boal, &goal[i]))
         {
+            boal.moveAlg = -1;
             goal[i].moveAlg = -1;
            
 
