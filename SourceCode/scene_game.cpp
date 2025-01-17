@@ -46,7 +46,7 @@ void game_update()
 	switch (game_state)
 	{
 	case 0:
-		sprBack = sprite_load(L"./Data/Images/map_1.png");
+		sprBack = sprite_load(L"./Data/Images/map01.png");
 
 
 		audio_init();
@@ -84,7 +84,7 @@ void game_update()
 		break;
 	}
 
-	/*scrollValue -= 5;
+	/*
 	if (scrollValue < -9000)
 	{
 		scrollValue = 0;
@@ -94,7 +94,7 @@ void game_update()
 }
 void game_render() {
 
-	sprite_render(sprBack, 0.0f, scrollValue); // ”wŒi‚ðƒJƒƒ‰‚ÌˆÊ’u‚É‡‚í‚¹‚Ä•`‰æ
+	sprite_render(sprBack, scrollValue, 0.0f); // ”wŒi‚ðƒJƒƒ‰‚ÌˆÊ’u‚É‡‚í‚¹‚Ä•`‰æ
 
 	player_render();
 	boal_render();
