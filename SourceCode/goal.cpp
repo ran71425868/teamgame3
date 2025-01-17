@@ -1,7 +1,6 @@
 #include "all.h"
 
 int     goal_state;
-int i;
 OBJ2D   goal[GOAL_MAX];
 
 struct GOAL_DATA {
