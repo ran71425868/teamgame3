@@ -24,6 +24,7 @@
 #define WALL_UP             BOAL_TEX_H * 0.5f
 
 
+#define GROUND_Y                    1000.0f
 //------< •Ï” >----------------------------------------------------------------
 
 extern OBJ2D boal;
@@ -38,6 +39,7 @@ void boal_render();
 
 void boal_moveX();
 void boal_moveY();
+
 
 
 #endif//PLAYER_H
