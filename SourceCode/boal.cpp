@@ -6,7 +6,7 @@ int boal_state;
 
 extern float scrollValue;
 
-//OBJ2DŒ^‚Ì•Ï”player‚ğéŒ¾
+//OBJ2DŒ^‚Ì•Ï”boal‚ğéŒ¾
 OBJ2D boal;
 
 Sprite* sprBoal;
@@ -109,8 +109,6 @@ void boal_render()
         boal.pivot.x, boal.pivot.y,
         ToRadian(0), boal.color.x, boal.color.y);
     
-    //primitive::rect(player.pos.x - 100, player.pos.y - 100, 200 * hp / 100, 15, 0, 0, ToRadian(0), 0, 1, 0);
-
     primitive::circle(boal.pos,
         boal.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f }
     );
@@ -133,9 +131,6 @@ void boal_moveY()
     if (STATE(0) & PAD_UP && !(STATE(0) & PAD_DOWN))
     {
         boal.pos.y -= 1;
-
-
-
     }
 
 }

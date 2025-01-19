@@ -51,6 +51,7 @@ void player_init()
 {
     //player_stateを0
     player_state = 0;
+
     player_angle = 0.0f;
     player_angle2 = 0;
     player_angle3 = 0;
@@ -122,8 +123,6 @@ void player_update()
         //位置に速度を足す
         player.pos += player.speed;
 
-        
-
        //膝・膝下の付け根座標
        //右足
        right_knee_PosX = right_waistX + cosf(ToRadian(player_angle + 90.0)) * 128.0f;
@@ -142,20 +141,29 @@ void player_update()
        float left_footX = left_knee_PosX + cosf(ToRadian(player_angle4 + 90.0)) * 128.0f;
        float left_footY = left_knee_PosY + sinf(ToRadian(player_angle4 + 90.0)) * 128.0f;
 
+       //足先から見た膝の座標
+       //右足
        right_foot_PosX =right_footX + cosf(ToRadian(player_angle2 - 90.0)) * 128.0f;
        right_foot_PosY =right_footY + sinf(ToRadian(player_angle2 - 90.0)) * 128.0f;
 
+       //左足
        left_foot_PosX = left_footX + cosf(ToRadian(player_angle4 - 90.0)) * 128.0f;
        left_foot_PosY = left_footY + sinf(ToRadian(player_angle4 - 90.0)) * 128.0f;
 
        
-       if (right_footY > GROUND_Y || left_footY > GROUND_Y)
+       if (right_footY > GROUND_Y)
        {
            ground = true;
            player.speed.y = 0.0f;
            right_footY = GROUND_Y;
+       }
+       if (left_footY > GROUND_Y)
+       {
+           ground = true;
+           player.speed.y = 0.0f;
            left_footY = GROUND_Y;
        }
+       
        else
        {
            ground = false;
@@ -181,6 +189,7 @@ void player_update()
        //左足
        left_waistX = left_foot_PosX + cosf(ToRadian(player_angle3 - 90.0)) * 128.0f;
        left_waistY = left_foot_PosY + sinf(ToRadian(player_angle3 - 90.0)) * 128.0f;
+
         break;
        
     }
@@ -228,9 +237,24 @@ void player_moveY()
     //右太ももを下に動かす処理
     if (STATE(0) & PAD_DOWN && !(STATE(0) & PAD_UP))
     {
-        player_angle -= PLAYER_ACCEL_Y;
+        player_angle -= 1.0f;
         if (player_angle < 0.0f)
             player_angle = 0.0f;
+
+        //太ももを降ろすと足も降りる
+        if (player_angle2 <= 40)
+        {
+            player_angle2 -= 1.0f;
+
+            /*if (player_angle <= 90&&player_angle>=45)
+            {
+                player_angle2 -= 0.1f;
+            }*/
+
+            if (player_angle2 < 0) {
+                player_angle2 = 0;
+            }
+        }
 
     }
 
@@ -268,11 +292,13 @@ void player_moveX()
             player_angle2 = 40.0f;
             scrollValue -= 2;
         }
+        //関節固定
         if (player_angle <= 40.0f && player_angle2 > 0)
         {
             player_angle2 -= 1.0f;
             scrollValue -= 2;
         }
+        
            
     }
 
@@ -283,6 +309,7 @@ void player_moveX()
         player_angle2 -= 1.0f;
         if (player_angle2 < -90.0f)
             player_angle2 = -90.0f;
+
         
 
     }
