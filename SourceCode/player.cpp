@@ -42,7 +42,6 @@ Sprite* sprRightArm;
 Sprite* sprThighs;
 Sprite* sprLeftLeg;
 Sprite* sprRightLeg;
-Sprite* sprPlayer;
 
 //--------------------------------------
 //  プレイヤーの初期設定
@@ -63,7 +62,12 @@ void player_init()
 void player_deinit()
 {
     //sprPlayerを破棄
-    safe_delete(sprPlayer);
+    safe_delete(sprBody);
+    safe_delete(sprLeftArm);
+    safe_delete(sprRightArm);
+    safe_delete(sprThighs);
+    safe_delete(sprLeftLeg);
+    safe_delete(sprRightLeg);
 }
 
 //--------------------------------------
@@ -79,10 +83,12 @@ void player_update()
         //////// 初期設定 ////////
 
         //プレイヤーの画像を読み込み
-        sprPlayer = sprite_load(L"./Data/Images/3.png");
+        sprBody = sprite_load(L"./Data/Images/upper_body.png");
+        sprLeftArm = sprite_load(L"./Data/Images/left_arm.png");
+        sprRightArm = sprite_load(L"./Data/Images/right_arm.png");
+        sprThighs = sprite_load(L"./Data/Images/thighs.png");
         sprLeftLeg = sprite_load(L"./Data/Images/left_leg.png");
         sprRightLeg = sprite_load(L"./Data/Images/right_leg.png");
-        sprThighs = sprite_load(L"./Data/Images/thighs.png");
 
         ++player_state;
         /*fallthrough*/
@@ -198,6 +204,18 @@ void player_update()
 void player_render()
 {
     //プレイヤーの描画
+    //体
+    sprite_render(sprBody, player.pos.x, player.pos.y-128, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y, 
+        ToRadian(0), player.color.x, player.color.y);
+     
+    //左腕
+    //sprite_render(sprLeftArm, player.pos.x, player.pos.y, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
+        //ToRadian(0), player.color.x, player.color.y);
+     
+    //右腕
+    //sprite_render(sprRightArm, player.pos.x, player.pos.y, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
+        //ToRadian(0), player.color.x, player.color.y);
+     
     // 右太もも
     sprite_render(sprThighs, right_waistX, right_waistY, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
         ToRadian(player_angle), player.color.x, player.color.y); 
@@ -224,55 +242,88 @@ void player_moveY()
     if(!ground)
         player.speed.y += GRAVITY;
 
-    //任意の操作による移動
+  //--------------------------------------------------------------
+  // 右太もも
+  //--------------------------------------------------------------
+
     //右太ももを上に動かす処理
     if (STATE(0) & PAD_UP && !(STATE(0) & PAD_DOWN))
     {
-       
-        player_angle += PLAYER_ACCEL_Y;
+        //回転速度
+        player_angle += 1.0f;
+
+        //右太ももを上に動かす限界値
         if (player_angle > 90.0f)
             player_angle = 90.0f;
+
+        //太ももが足に食い込まない処理
+        if (player_angle2 < 0)
+            player_angle = 0;
+        
     }
 
     //右太ももを下に動かす処理
     if (STATE(0) & PAD_DOWN && !(STATE(0) & PAD_UP))
     {
+        //回転速度
         player_angle -= 1.0f;
+
+        //右太ももを下に動かす限界値
         if (player_angle < 0.0f)
             player_angle = 0.0f;
 
-        //太ももを降ろすと足も降りる
+        //太ももを降ろすと足も降りる処理
         if (player_angle2 <= 40)
         {
             player_angle2 -= 1.0f;
 
-            /*if (player_angle <= 90&&player_angle>=45)
-            {
-                player_angle2 -= 0.1f;
-            }*/
-
+            //太ももが足に食い込まない処理
             if (player_angle2 < 0) {
-                player_angle2 = 0;
+                player_angle2 += 1.0f;
             }
         }
 
     }
 
+   //--------------------------------------------------------------
+   // 左太もも
+   //--------------------------------------------------------------
+
     //左太ももを上に動かす処理
     if (STATE(0) & PAD_L1 && !(STATE(0) & PAD_R1))
     {
-        
-        player_angle3 += PLAYER_ACCEL_Y;
+        //回転速度
+        player_angle3 += 1.0f;
+
+        //左太ももを上に動かす限界値
         if (player_angle3 > 90.0f)
             player_angle3 = 90.0f;
+
+        //太ももが足に食い込まない処理
+        if (player_angle4 < 0)
+            player_angle3 = 0;
     }
 
     //左太ももを下に動かす処理
     if (STATE(0) & PAD_R1 && !(STATE(0) & PAD_L1))
     {
-        player_angle3 -= PLAYER_ACCEL_Y;
+        //回転速度
+        player_angle3 -= 1.0f;
+
+        //左太ももを下に動かす限界値
         if (player_angle3 < 0.0f)
             player_angle3 = 0.0f;
+
+        //太ももを降ろすと足も降りる処理
+        if (player_angle4 <= 40)
+        {
+            player_angle4 -= 1.0f;
+
+            //太ももが足に食い込まない処理
+            if (player_angle4 < 0) {
+                player_angle4 += 1.0f;
+            }
+        }
     }
 }
 
@@ -280,57 +331,100 @@ void player_moveY()
 
 void player_moveX()
 {
-
-    //任意の操作による移動
+   //--------------------------------------------------------------
+   // 右足
+   //--------------------------------------------------------------
+    
     //右足を前に動かす処理
     if (STATE(0) & PAD_LEFT && !(STATE(0) & PAD_RIGHT)) 
     {
+        //移動処理
         scrollValue += 2;
+        //回転速度
         player_angle2 += 1.0f;
+
+        //右足を前にする限界値
         if (player_angle2 > 40.0f) 
         {
             player_angle2 = 40.0f;
+            //移動停止
             scrollValue -= 2;
         }
-        //関節固定
+
+        //膝の可動域を超えない処理
         if (player_angle <= 40.0f && player_angle2 > 0)
         {
             player_angle2 -= 1.0f;
+            //移動停止
             scrollValue -= 2;
         }
-        
            
     }
 
     //右足を後ろに動かす処理
     if (STATE(0) & PAD_RIGHT && !(STATE(0) & PAD_LEFT)) 
     {
-        //player.speed.x += PLAYER_ACCEL_X;
+        //回転速度
         player_angle2 -= 1.0f;
+
+        //右足を後ろにする限界値
         if (player_angle2 < -90.0f)
             player_angle2 = -90.0f;
 
-        
+        //膝に足が食い込まない処理
+        if (player_angle >= 90)
+            player_angle2 += 1.0f;
+       
 
     }
+
+    //--------------------------------------------------------------
+    // 左足
+    //--------------------------------------------------------------
 
     //左足を前に動かす処理
     if (STATE(0) & PAD_L3 && !(STATE(0) & PAD_R3))
     {
-        player_angle4 += PLAYER_ACCEL_X;
-        if (player_angle4 > 60.0f)
-            player_angle4 = 60.0f;
+        //移動処理
+        scrollValue += 2;
+        //回転速度
+        player_angle4 += 1.0f;
 
+        //左足を前にする限界値
+        if (player_angle4 > 60.0f) 
+        {
+            player_angle4 = 60.0f;
+            //移動停止
+            scrollValue -= 2;
+        }
+
+        //膝の可動域を超えない処理
+        if (player_angle3 <= 40.0f && player_angle4 > 0)
+        {
+            player_angle4 -= 1.0f;
+            //移動停止
+            scrollValue -= 2;
+        }
     }
 
     //左足を後ろに動かす処理
     if (STATE(0) & PAD_R3 && !(STATE(0) & PAD_L3))
     {
-        player_angle4 -= PLAYER_ACCEL_X;
+        //移動処理
+        scrollValue += 2;
+        //回転速度
+        player_angle4 -= 1.0f;
+
+        //左足を後ろにする限界値
         if (player_angle4 < -60.0f)
             player_angle4 = -60.0f;
 
+        //膝に足が食い込まない処理
+        if (player_angle3 >= 90)
+            player_angle4 += 1.0f;
     }
+
+    //加減速処理
     else {
         if (player.speed.x > 0) {
             player.speed.x -= PLAYER_DECEL_X;
@@ -347,6 +441,7 @@ void player_moveX()
         }
 
     }
+    //速度を一定にする
     if (player.speed.x >= PLAYER_SPEED_X_MAX)
         player.speed.x = PLAYER_SPEED_X_MAX;
 
