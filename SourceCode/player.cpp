@@ -81,7 +81,8 @@ void player_deinit()
 //  プレイヤーの更新処理
 //--------------------------------------
 
-bool ground = false;
+bool right_ground = false;
+bool left_ground = false;
 VECTOR2 body;
 void player_update()
 {
@@ -168,20 +169,29 @@ void player_update()
        
        if (right_footY > GROUND_Y)
        {
-           ground = true;
-           player.speed.y = 0.0f;
            right_footY = GROUND_Y;
+           if (right_footX == GROUND_Y) 
+           {
+               right_ground = true;
+               player.speed.y = 0.0f;
+
+           }
        }
        if (left_footY > GROUND_Y)
        {
-           ground = true;
-           player.speed.y = 0.0f;
            left_footY = GROUND_Y;
+           if (left_footY == GROUND_Y)
+           {
+               left_ground = true;
+               player.speed.y = 0.0f;
+
+           }
        }
        
        else
        {
-           ground = false;
+           right_ground = false;
+           left_ground = false;
        }
 
        //膝固定
@@ -252,7 +262,7 @@ void player_render()
         ToRadian(player_angle4), player.color.x, player.color.y);
 
     //体
-    sprite_render(sprBody, /*player.pos.x + 40, player.pos.y - 350,*/body.x,body.y, player.scale.x * 2.8, player.scale.y * 2.8, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y + player.texSize.y - 20.0f,
+    sprite_render(sprBody, body.x, body.y, player.scale.x * 2.8, player.scale.y * 2.8, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y + player.texSize.y - 20.0f,
         ToRadian(0), player.color.x, player.color.y);
 
     primitive::rect(0,GROUND_Y, 1920, 80,0,0, ToRadian(0), 0, 1, 0);
@@ -265,7 +275,7 @@ void player_moveY()
 {
     
     //重力
-    if(!ground&&!ground)
+    if(!right_ground&&!left_ground)
         player.speed.y += GRAVITY;
 
   //--------------------------------------------------------------
