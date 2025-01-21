@@ -27,7 +27,7 @@ int nextScene = SCENE_TITLE;
 // WinMain 関数を記述する
 int APIENTRY wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int) {
 	//ゲームライブラリの初期設定
-	GameLib::init(L"Skiing in Escape", SCREEN_W, SCREEN_H);
+	GameLib::init(L"Exciting Soccer", SCREEN_W, SCREEN_H);
 	//setFullScreenMode();
 
 	audio_init();

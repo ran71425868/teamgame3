@@ -82,6 +82,7 @@ void player_deinit()
 //--------------------------------------
 
 bool ground = false;
+VECTOR2 body;
 void player_update()
 {
     switch (player_state)
@@ -114,7 +115,7 @@ void player_update()
         player.color = { 1.0f,1.0f,1.0f,1.0f };
         player.radius = 20.0f;
         player.offset = { 0,-64 };
-
+        body = { 0 , 0 };
 
         ++player_state;
         /*fallthrough*/
@@ -163,6 +164,7 @@ void player_update()
        left_foot_PosX = left_footX + cosf(ToRadian(player_angle4 - 90.0)) * 128.0f;
        left_foot_PosY = left_footY + sinf(ToRadian(player_angle4 - 90.0)) * 128.0f;
 
+
        
        if (right_footY > GROUND_Y)
        {
@@ -203,6 +205,20 @@ void player_update()
        left_waistX = left_foot_PosX + cosf(ToRadian(player_angle3 - 90.0)) * 128.0f;
        left_waistY = left_foot_PosY + sinf(ToRadian(player_angle3 - 90.0)) * 128.0f;
 
+       // 右足→左足のベクトル
+       VECTOR2 footVec(left_waistX - right_waistX, left_waistY - right_waistY);
+       // 距離
+       float dist = sqrtf(footVec.x * footVec.x + footVec.y * footVec.y);
+       footVec.x /= dist;
+       footVec.y /= dist;
+
+       dist /= 2;
+
+       body.x = right_waistX + footVec.x * dist;
+       body.y = right_waistY + footVec.y * dist;
+       debug::setString("dist:%f", dist);
+
+
         break;
        
     }
@@ -236,7 +252,7 @@ void player_render()
         ToRadian(player_angle4), player.color.x, player.color.y);
 
     //体
-    sprite_render(sprBody, player.pos.x+40, player.pos.y-350, player.scale.x*2.8, player.scale.y*2.8, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y, 
+    sprite_render(sprBody, /*player.pos.x + 40, player.pos.y - 350,*/body.x,body.y, player.scale.x * 2.8, player.scale.y * 2.8, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y + player.texSize.y - 20.0f,
         ToRadian(0), player.color.x, player.color.y);
 
     primitive::rect(0,GROUND_Y, 1920, 80,0,0, ToRadian(0), 0, 1, 0);
@@ -249,7 +265,7 @@ void player_moveY()
 {
     
     //重力
-    if(!ground)
+    if(!ground&&!ground)
         player.speed.y += GRAVITY;
 
   //--------------------------------------------------------------
