@@ -114,6 +114,13 @@ void goal_update()
         {
             for (int i = 0; i < 9; i++) {
                 goal[i].pos.x += 2;
+                //‰E‘«‚ð‘O‚É‚·‚éŒÀŠE’l‚É‚È‚Á‚½‚çƒS[ƒ‹Ž~‚ß‚é
+                if (player_angle2 > 40.0f)
+                {
+                    player_angle2 = 40.0f;
+                    //ˆÚ“®’âŽ~
+                    goal[i].pos.x -= 2;
+                }
             }
         }
 
