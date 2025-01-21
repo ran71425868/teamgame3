@@ -38,6 +38,7 @@ void judge()
         {
            /* boal.moveAlg = -1;*/
             goal[i].moveAlg = -1;
+            boal.moveAlg = -1;
             score += ten;
 
             if (goal[0].moveAlg == -1 && goal[1].moveAlg == -1 &&goal[2].moveAlg == -1) {
@@ -72,14 +73,13 @@ void judge()
         }
     }
     //É{Å[ÉãÇ∆ë´
-    for (int i = 9; i < 10; i++)
+    
+    if (hitCheck(&boal, &goal[9]))
     {
-        if (hitCheck(&boal,&goal[i]))
-        {
-            game_score();
-            /*boal.pos.x += 1;
-            boal.pos.y += 1;*/
-        }
+        game_score();
+        /*boal.pos.x += 1;
+        boal.pos.y += 1;*/
+
     }
    
 }
