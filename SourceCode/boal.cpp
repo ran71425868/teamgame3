@@ -2,9 +2,11 @@
 
 
 int boal_state;
-
+float speed;
+extern OBJ2D goal[GOAL_MAX];
 
 extern float scrollValue;
+extern float player_angle2;
 
 //OBJ2D型の変数boalを宣言
 OBJ2D boal;
@@ -18,7 +20,7 @@ void boal_init()
 {
     //boal_stateを0
     boal_state = 0;
-
+    speed = 0;
 }
 //--------------------------------------
 //  プレイヤーの終了処理
@@ -94,6 +96,8 @@ void boal_update()
             }
         }*/
         
+            boal.pos.x -= boal.speed.x;
+            boal.pos.y -= boal.speed.y;
         break;
     }
 }
@@ -115,24 +119,56 @@ void boal_render()
 }
 void boal_moveX()
 {
-    if (STATE(0) & PAD_LEFT && !(STATE(0) & PAD_RIGHT))
+    if (STATE(0) & PAD_LEFT)
     {
         //boal.pos.x += 0.05;
         //boal.pos.x += 0.2;
         boal.pos.x += 1.0;
-        
+
     }
- /*   if (STATE(0) & PAD_RIGHT && !(STATE(0) & PAD_LEFT))
+
+    if (hitCheck(&boal, &goal[9]))
     {
-        boal.pos.x == 0;
-    }*/
+
+        if (player_angle2 < -60)
+        {
+
+            boal.speed.x += 3.5f;
+            boal.speed.y += 3.5f;
+
+        }
+        if (player_angle2 < -30)
+        {
+            /* for (int i = 0; i < SCREEN_W; i++)
+             {
+             }*/
+
+            boal.speed.x += 6.0f;
+            boal.speed.y += 6.0f;
+
+        }
+        if (player_angle2 < -1)
+        {
+            boal.speed.x += 12.5f;
+            boal.speed.y += 12.5f;
+
+           
+        }
+        else
+        {
+            boal.pos.x += 0;
+            boal.pos.y += 0;
+
+         
+        }
+    }
 }
 void boal_moveY()
 {
-    if (STATE(0) & PAD_UP && !(STATE(0) & PAD_DOWN))
-    {
-        boal.pos.y -= 1;
-    }
+    //if (STATE(0) & PAD_UP && !(STATE(0) & PAD_DOWN))
+    //{
+    //    boal.pos.y -= 1;
+    //}
 
 }
 
