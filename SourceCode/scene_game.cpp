@@ -97,6 +97,7 @@ void game_update()
 void game_render() {
 
 	sprite_render(sprBack, scrollValue, 0.0f); // ”wŒi‚ğƒJƒƒ‰‚ÌˆÊ’u‚É‡‚í‚¹‚Ä•`‰æ
+	sprite_render(sprBack, scrollValue - 1920, 0.0f); // ”wŒi‚ğƒJƒƒ‰‚ÌˆÊ’u‚É‡‚í‚¹‚Ä•`‰æ
 
 	player_render();
 	goal_render();
