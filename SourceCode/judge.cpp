@@ -25,6 +25,10 @@ bool hitCheck(OBJ2D* obj1, OBJ2D* obj2) {
 
 void judge()
 {
+    
+    int ten = 10;
+    int score = 0;
+
     //”»’è
     for (int i = 0; i < GOAL_MAX; ++i) {
         if (goal[i].moveAlg == -1) continue;
@@ -34,8 +38,33 @@ void judge()
         {
            /* boal.moveAlg = -1;*/
             goal[i].moveAlg = -1;
-           
+            score += ten;
 
+            if (goal[0].moveAlg == -1 && goal[1].moveAlg == -1 &&goal[2].moveAlg == -1) {
+                score += 50;
+            }
+            if (goal[3].moveAlg == -1 && goal[4].moveAlg == -1 && goal[5].moveAlg == -1) {
+                score += 50;
+            }
+            if (goal[6].moveAlg == -1 && goal[7].moveAlg == -1 && goal[8].moveAlg == -1) {
+                score += 50;
+            }
+            if (goal[0].moveAlg == -1 && goal[3].moveAlg == -1 && goal[6].moveAlg == -1) {
+                score += 50;
+            }
+            if (goal[1].moveAlg == -1 && goal[4].moveAlg == -1 && goal[7].moveAlg == -1) {
+                score += 50;
+            }
+            if (goal[2].moveAlg == -1 && goal[5].moveAlg == -1 && goal[8].moveAlg == -1) {
+                score += 50;
+            }
+            if (goal[0].moveAlg == -1 && goal[4].moveAlg == -1 && goal[8].moveAlg == -1) {
+                score += 50;
+            }
+            if (goal[2].moveAlg == -1 && goal[4].moveAlg == -1 && goal[6].moveAlg == -1) {
+                score += 50;
+            }
+           
             //scene_reset();
            /* if (&goal[i] == 0) {
                 nextScene = SCENE_CLEAR;
