@@ -130,14 +130,14 @@ void boal_moveX()
     if (hitCheck(&boal, &goal[9]))
     {
 
-        if (player_angle2 < -60)
+        if (player_angle2 < 60)
         {
 
             boal.speed.x += 3.5f;
             boal.speed.y += 3.5f;
 
         }
-        if (player_angle2 < -30)
+        if (player_angle2 < 30)
         {
             /* for (int i = 0; i < SCREEN_W; i++)
              {
@@ -147,20 +147,20 @@ void boal_moveX()
             boal.speed.y += 6.0f;
 
         }
-        if (player_angle2 < -1)
+        if (player_angle2 < 1)
         {
             boal.speed.x += 12.5f;
             boal.speed.y += 12.5f;
 
            
         }
-        else
+        /*else
         {
             boal.pos.x += 0;
             boal.pos.y += 0;
 
          
-        }
+        }*/
     }
 }
 void boal_moveY()
