@@ -109,7 +109,7 @@ void game_render() {
 }
 void game_score()
 {
-
+	score = 10;
 
 }
 

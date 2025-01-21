@@ -1,7 +1,7 @@
 #ifndef GOAL_H
 #define GOAL_H
 
-#define GOAL_MAX   (9)
+#define GOAL_MAX   (10)
 
 void goal_init();
 void goal_deinit();
@@ -17,5 +17,7 @@ void setGoal5(OBJ2D* obj);
 void setGoal6(OBJ2D* obj);
 void setGoal7(OBJ2D* obj);
 void setGoal8(OBJ2D* obj);
+
+void naiki(OBJ2D* obj);
 
 #endif

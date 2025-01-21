@@ -1,6 +1,11 @@
 #include "all.h"
 
 int goal_state;
+float angle;
+
+extern float player_angle2;
+extern float right_footX;
+extern float right_footY;
 
 struct GOAL_DATA {
     Sprite* spr;
@@ -20,6 +25,7 @@ goalData[] = {
        {NULL,   L"./Data/Images/07.png", { 0,0 }, { 226, 239 }, { 113  , 119.5 }, {60}},
        {NULL,   L"./Data/Images/08.png", { 0,0 }, { 226, 239 }, { 113  , 119.5 }, {60}},
        {NULL,   L"./Data/Images/09.png", { 0,0 }, { 227, 238 }, { 113.5, 119   }, {60}},
+       {NULL,   L"./Data/Images/naiki.png", { 0,0 }, { 64, 128 }, { 32, 64  }, {20}},
 };
 OBJ2D goal[GOAL_MAX];
 
@@ -37,6 +43,7 @@ goalSet[] = {
     {6,{  100, 800}},
     {7,{  300, 800}},
     {8,{  500, 800}},
+    {9,{  950, 985}},
     {-1,{  -1, -1 }},
 };
 //--------------------------------------
@@ -46,6 +53,7 @@ void goal_init()
 {
     //goal_stateÇ0
     goal_state = 0;
+    angle = 0;
 }
 
 //--------------------------------------
@@ -139,6 +147,9 @@ void goal_update()
                 break;
             case 8:
                 setGoal8(&goal[i]);
+                break;
+            case 9:
+                naiki(&goal[i]);
                 break;
             }
 
@@ -389,5 +400,34 @@ void setGoal8(OBJ2D* obj)
         break;
     }
 
+}
+
+void naiki(OBJ2D* obj)
+{
+    switch (obj->state)
+    {
+    case 0:
+
+        //9ñáñ⁄
+        obj->scale = { 0.5f,0.5f };
+        obj->color = { 1,1,1,1 };
+        obj->spr = goalData[9].spr;
+        obj->texPos = goalData[9].texPos;
+        obj->texSize = goalData[9].texSize;
+        obj->pivot = goalData[9].pivot;
+        obj->radius = goalData[9].radius;
+
+        ++obj->state;
+        /*fallthrough*/
+
+    case 1:
+        ////////í èÌéû////////
+        goal[9].pos.x = right_footX-10;
+        goal[9].pos.y = right_footY-15;
+
+        angle += player_angle2;
+        ToRadian(angle);
+        break;
+    }
 }
 

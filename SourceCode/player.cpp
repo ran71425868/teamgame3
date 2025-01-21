@@ -75,7 +75,6 @@ void player_deinit()
     safe_delete(sprThighs);
     safe_delete(sprLeftLeg);
     safe_delete(sprRightLeg);
-    safe_delete(sprNaiki);
 }
 
 //--------------------------------------
@@ -97,8 +96,6 @@ void player_update()
         sprThighs = sprite_load(L"./Data/Images/thighs.png");
         sprLeftLeg = sprite_load(L"./Data/Images/left_leg.png");
         sprRightLeg = sprite_load(L"./Data/Images/right_leg.png");
-
-        sprNaiki = sprite_load(L"./Data/Images/naiki.png");
 
         ++player_state;
         /*fallthrough*/
@@ -214,7 +211,7 @@ void player_update()
 void player_render()
 {
     //ÉvÉåÉCÉÑÅ[ÇÃï`âÊ
-    //ëÃ
+    
      
     //ç∂òr
     //sprite_render(sprLeftArm, player.pos.x, player.pos.y, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
@@ -238,20 +235,14 @@ void player_render()
     sprite_render(sprLeftLeg, left_knee_PosX, left_knee_PosY, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
         ToRadian(player_angle4), player.color.x, player.color.y);
 
-    sprite_render(sprNaiki, right_footX, right_footY, player.scale.x*0.5f, player.scale.y*0.5f, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y+90,
-        ToRadian(player_angle4), player.color.x, player.color.y);
-
-
-
-
-
+    //ëÃ
     sprite_render(sprBody, player.pos.x+40, player.pos.y-350, player.scale.x*2.8, player.scale.y*2.8, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y, 
         ToRadian(0), player.color.x, player.color.y);
 
     primitive::rect(0,GROUND_Y, 1920, 80,0,0, ToRadian(0), 0, 1, 0);
 
     primitive::circle({ right_knee_PosX ,right_knee_PosY }, player.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f });
-    primitive::circle({ right_footX ,right_footY-20 }, player.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f });
+    
 }
 
 void player_moveY()

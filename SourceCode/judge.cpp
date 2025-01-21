@@ -30,7 +30,7 @@ void judge()
     int score = 0;
 
     //”»’è
-    for (int i = 0; i < GOAL_MAX; ++i) {
+    for (int i = 0; i < 9; ++i) {
         if (goal[i].moveAlg == -1) continue;
         
 
@@ -72,12 +72,16 @@ void judge()
         }
     }
     //ƒ{[ƒ‹‚Æ‘«
-    if (hitCheck(&boal, &player))
+    for (int i = 9; i < 10; i++)
     {
-        boal.moveAlg = -1;
-        boal.pos.x += 1;
-        boal.pos.y += 1;
+        if (hitCheck(&boal,&goal[i]))
+        {
+            game_score();
+            /*boal.pos.x += 1;
+            boal.pos.y += 1;*/
+        }
     }
+   
 }
 //ƒS[ƒ‹
 void goaljudge()
