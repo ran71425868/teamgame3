@@ -7,6 +7,9 @@ extern float player_angle2;
 extern float right_footX;
 extern float right_footY;
 
+extern float scrollValue;
+
+
 struct GOAL_DATA {
     Sprite* spr;
     const wchar_t* filePath;
@@ -113,18 +116,21 @@ void goal_update()
         if (STATE(0) & PAD_LEFT && !(STATE(0) & PAD_RIGHT))
         {
             for (int i = 0; i < 9; i++) {
-                goal[i].pos.x += 2;
+                goal[i].pos.x += scrollValue;
                 //‰E‘«‚ð‘O‚É‚·‚éŒÀŠE’l‚É‚È‚Á‚½‚çƒS[ƒ‹Ž~‚ß‚é
                 if (player_angle2 > 40.0f)
                 {
                     player_angle2 = 40.0f;
                     //ˆÚ“®’âŽ~
-                    goal[i].pos.x -= 2;
+                    goal[i].pos.x -= scrollValue;
                 }
             }
         }
 
-
+        if (STATE(0) & PAD_TRG1)
+        {
+            scrollValue = 1930;
+        }
 
 
         for (int i = 0; i < GOAL_MAX; i++) {
@@ -195,6 +201,7 @@ void goal_render()
             goal[i].color.z, goal[i].color.w);
 
         primitive::circle(goal[i].pos, goal[i].radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f });
+
     }
 }
 
