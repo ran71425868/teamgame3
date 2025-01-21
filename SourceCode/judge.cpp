@@ -32,7 +32,7 @@ void judge()
 
         if (hitCheck(&boal, &goal[i]))
         {
-            boal.moveAlg = -1;
+           /* boal.moveAlg = -1;*/
             goal[i].moveAlg = -1;
            
 
@@ -41,6 +41,13 @@ void judge()
                 nextScene = SCENE_CLEAR;
             }*/
         }
+    }
+    //É{Å[ÉãÇ∆ë´
+    if (hitCheck(&boal, &player))
+    {
+        boal.moveAlg = -1;
+        boal.pos.x += 1;
+        boal.pos.y += 1;
     }
 }
 //ÉSÅ[Éã
