@@ -7,6 +7,8 @@
 
 using namespace std;
 
+extern OBJ2D goal[GOAL_MAX];
+
 
 int game_state;
 int game_timer;
@@ -107,12 +109,8 @@ void game_render() {
 }
 void game_score()
 {
-	if (combo >= 10)
-		comboscore = 2.5f;
-	else if (combo >= 5)
-		comboscore = 2.0f;
-	else
-		comboscore = 1.0f;
+
+
 }
 
 void game_clear()
