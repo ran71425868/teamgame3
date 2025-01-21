@@ -118,20 +118,20 @@ void boal_moveX()
     if (STATE(0) & PAD_LEFT && !(STATE(0) & PAD_RIGHT))
     {
         //boal.pos.x += 0.05;
-        boal.pos.x -= 0.5;
+        boal.pos.x += 0.2;
 
     }
-    if (STATE(0) & PAD_RIGHT && !(STATE(0) & PAD_LEFT))
+ /*   if (STATE(0) & PAD_RIGHT && !(STATE(0) & PAD_LEFT))
     {
         boal.pos.x == 0;
-    }
+    }*/
 }
 void boal_moveY()
 {
-    if (STATE(0) & PAD_UP && !(STATE(0) & PAD_DOWN))
-    {
-        boal.pos.y -= 1;
-    }
+    //if (STATE(0) & PAD_UP && !(STATE(0) & PAD_DOWN))
+    //{
+    //    boal.pos.y -= 1;
+    //}
 
 }
 
