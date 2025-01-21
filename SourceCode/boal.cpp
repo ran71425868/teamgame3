@@ -133,8 +133,8 @@ void boal_moveX()
         if (player_angle2 < 60)
         {
 
-            boal.speed.x += 3.5f;
-            boal.speed.y += 3.5f;
+            boal.speed.x += 1.5f;
+            boal.speed.y += 1.5f;
 
         }
         if (player_angle2 < 30)
@@ -143,14 +143,14 @@ void boal_moveX()
              {
              }*/
 
-            boal.speed.x += 6.0f;
-            boal.speed.y += 6.0f;
+            boal.speed.x += 1.0f;
+            boal.speed.y += 1.0f;
 
         }
         if (player_angle2 < 1)
         {
-            boal.speed.x += 12.5f;
-            boal.speed.y += 12.5f;
+            boal.speed.x += 3.5f;
+            boal.speed.y += 3.5f;
 
            
         }
