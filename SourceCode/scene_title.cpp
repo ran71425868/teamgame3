@@ -22,7 +22,7 @@ void title_update() {
 		//////// ‰Šúİ’è ////////
 
 		audio_init();
-		/*sprTitle1 = */sprite_load(L"./Data/Images/title.png");
+		sprTitle1 = sprite_load(L"./Data/Images/title.png");
 	/*	sprTitle2 = sprite_load(L"./Data/Images/title_b.png");
 		sprTitle_name = sprite_load(L"./Data/Images/BPush.png");
 		sprTitle_Push = sprite_load(L"./Data/Images/Push.png");*/

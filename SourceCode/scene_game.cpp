@@ -42,6 +42,7 @@ void game_deinit() {
 	player_deinit();
 	goal_deinit();
 	boal_deinit();
+    title_deinit();
 }
 void game_update()
 {
@@ -79,6 +80,7 @@ void game_update()
 		player_update();
 		goal_update();
 		boal_update();
+		title_update();
 		
 		judge();
 		
@@ -102,6 +104,7 @@ void game_render() {
 	player_render();
 	goal_render();
 	boal_render();
+	
 
 	text_out(0, "score", 1700, 450, 2, 2);
 	text_out(0, std::to_string(score), 1700, 500, 2, 2);
