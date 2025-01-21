@@ -31,6 +31,12 @@ float right_foot_PosY;
 float left_foot_PosX;
 float left_foot_PosY;
 
+float right_footX;
+float right_footY;
+
+float left_footX;
+float left_footY;
+
 extern float scrollValue;
 
 //OBJ2D型の変数playerを宣言
@@ -42,6 +48,7 @@ Sprite* sprRightArm;
 Sprite* sprThighs;
 Sprite* sprLeftLeg;
 Sprite* sprRightLeg;
+Sprite* sprNaiki;
 
 //--------------------------------------
 //  プレイヤーの初期設定
@@ -68,6 +75,7 @@ void player_deinit()
     safe_delete(sprThighs);
     safe_delete(sprLeftLeg);
     safe_delete(sprRightLeg);
+    safe_delete(sprNaiki);
 }
 
 //--------------------------------------
@@ -90,6 +98,8 @@ void player_update()
         sprLeftLeg = sprite_load(L"./Data/Images/left_leg.png");
         sprRightLeg = sprite_load(L"./Data/Images/right_leg.png");
 
+        sprNaiki = sprite_load(L"./Data/Images/naiki.png");
+
         ++player_state;
         /*fallthrough*/
 
@@ -106,7 +116,7 @@ void player_update()
         player.pivot = { PLAYER_PIVOT_X,PLAYER_PIVOT_Y };
         player.color = { 1.0f,1.0f,1.0f,1.0f };
         player.radius = 20.0f;
-        player.offset = { 0,0 };
+        player.offset = { 0,-64 };
 
 
         ++player_state;
@@ -119,7 +129,7 @@ void player_update()
         right_waistX = player.pos.x;
         right_waistY = player.pos.y;
 
-        left_waistX = player.pos.x + 100;
+        left_waistX = player.pos.x + 60;
         left_waistY = player.pos.y;
 
         //player_moveX・Yを呼ぶ
@@ -140,12 +150,12 @@ void player_update()
 
        //足先
        //右足
-       float right_footX = right_knee_PosX + cosf(ToRadian(player_angle2 + 90.0)) * 128.0f;
-       float right_footY = right_knee_PosY + sinf(ToRadian(player_angle2 + 90.0)) * 128.0f;
+       right_footX = right_knee_PosX + cosf(ToRadian(player_angle2 + 90.0)) * 128.0f;
+       right_footY = right_knee_PosY + sinf(ToRadian(player_angle2 + 90.0)) * 128.0f;
 
        //左足
-       float left_footX = left_knee_PosX + cosf(ToRadian(player_angle4 + 90.0)) * 128.0f;
-       float left_footY = left_knee_PosY + sinf(ToRadian(player_angle4 + 90.0)) * 128.0f;
+       left_footX = left_knee_PosX + cosf(ToRadian(player_angle4 + 90.0)) * 128.0f;
+       left_footY = left_knee_PosY + sinf(ToRadian(player_angle4 + 90.0)) * 128.0f;
 
        //足先から見た膝の座標
        //右足
@@ -205,8 +215,6 @@ void player_render()
 {
     //プレイヤーの描画
     //体
-    sprite_render(sprBody, player.pos.x, player.pos.y-128, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y, 
-        ToRadian(0), player.color.x, player.color.y);
      
     //左腕
     //sprite_render(sprLeftArm, player.pos.x, player.pos.y, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
@@ -230,9 +238,20 @@ void player_render()
     sprite_render(sprLeftLeg, left_knee_PosX, left_knee_PosY, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
         ToRadian(player_angle4), player.color.x, player.color.y);
 
+    sprite_render(sprNaiki, right_footX, right_footY, player.scale.x*0.5f, player.scale.y*0.5f, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y+90,
+        ToRadian(player_angle4), player.color.x, player.color.y);
+
+
+
+
+
+    sprite_render(sprBody, player.pos.x+40, player.pos.y-350, player.scale.x*2.8, player.scale.y*2.8, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y, 
+        ToRadian(0), player.color.x, player.color.y);
+
     primitive::rect(0,GROUND_Y, 1920, 80,0,0, ToRadian(0), 0, 1, 0);
 
-    //primitive::circle({ player.pos.x + cosf(ToRadian(player_angle + 90.0)) * 128.0f,player.pos.y + sinf(ToRadian(player_angle + 90.0)) * 256.0f }, player.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f });
+    primitive::circle({ right_knee_PosX ,right_knee_PosY }, player.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f });
+    primitive::circle({ right_footX ,right_footY-20 }, player.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f });
 }
 
 void player_moveY()
