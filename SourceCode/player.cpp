@@ -2,9 +2,6 @@
 
 int player_state;
 
-int scroll_position_X;
-int scroll_position_Y;
-
 //˜
 float right_waistX;
 float right_waistY;
@@ -36,6 +33,8 @@ float right_footY;
 
 float left_footX;
 float left_footY;
+
+float scroll_position_X;
 
 extern float scrollValue;
 
@@ -115,7 +114,7 @@ void player_update()
         player.pivot = { PLAYER_PIVOT_X,PLAYER_PIVOT_Y };
         player.color = { 1.0f,1.0f,1.0f,1.0f };
         player.radius = 20.0f;
-        player.offset = { 0,-64 };
+        player.offset = { 0,0 };
         body = { 0 , 0 };
 
         ++player_state;
@@ -269,6 +268,7 @@ void player_render()
 
     primitive::circle({ right_knee_PosX ,right_knee_PosY }, player.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f });
     
+   
 }
 
 void player_moveY()
@@ -363,8 +363,6 @@ void player_moveY()
     }
 }
 
-
-
 void player_moveX()
 {
    //--------------------------------------------------------------
@@ -376,6 +374,8 @@ void player_moveX()
     {
         //ˆÚ“®ˆ—
         scrollValue += 2;
+        scroll_position_X += 2;
+        
         //‰ñ“]‘¬“x
         player_angle2 += 1.0f;
 
@@ -385,6 +385,7 @@ void player_moveX()
             player_angle2 = 40.0f;
             //ˆÚ“®’â~
             scrollValue -= 2;
+            scroll_position_X -= 2;
         }
 
         //•G‚Ì‰Â“®ˆæ‚ğ’´‚¦‚È‚¢ˆ—

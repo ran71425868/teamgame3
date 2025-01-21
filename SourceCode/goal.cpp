@@ -3,11 +3,14 @@
 int goal_state;
 float angle;
 
+extern int player_state;
 extern float player_angle2;
 extern float right_footX;
 extern float right_footY;
 
-extern float scrollValue;
+extern float scrollValue; 
+extern float scroll_position_X;
+
 
 
 struct GOAL_DATA {
@@ -116,20 +119,53 @@ void goal_update()
         if (STATE(0) & PAD_LEFT && !(STATE(0) & PAD_RIGHT))
         {
             for (int i = 0; i < 9; i++) {
-                goal[i].pos.x += scrollValue;
+                goal[i].pos.x += 2;
                 //‰E‘«‚ð‘O‚É‚·‚éŒÀŠE’l‚É‚È‚Á‚½‚çƒS[ƒ‹Ž~‚ß‚é
                 if (player_angle2 > 40.0f)
                 {
-                    player_angle2 = 40.0f;
                     //ˆÚ“®’âŽ~
-                    goal[i].pos.x -= scrollValue;
+                    goal[i].pos.x -= 2;
                 }
             }
         }
 
         if (STATE(0) & PAD_TRG1)
         {
-            scrollValue = 1930;
+            scrollValue = 1920;
+            
+            goal[0].pos.x = scrollValue - scrollValue + 100;
+            goal[3].pos.x = scrollValue - scrollValue + 100;
+            goal[6].pos.x = scrollValue - scrollValue + 100;
+
+            goal[1].pos.x = scrollValue - scrollValue + 300;
+            goal[4].pos.x = scrollValue - scrollValue + 300;
+            goal[7].pos.x = scrollValue - scrollValue + 300;
+
+            goal[2].pos.x = scrollValue - scrollValue + 500;
+            goal[5].pos.x = scrollValue - scrollValue + 500;
+            goal[8].pos.x = scrollValue - scrollValue + 500;
+
+            player_deinit();
+            goal[9].moveAlg = -1;
+        }
+
+        if (STATE(0) & PAD_START)
+        {
+            scrollValue = scroll_position_X;
+
+            goal[0].pos.x = -1820 + scroll_position_X;
+            goal[3].pos.x = -1820 + scroll_position_X;
+            goal[6].pos.x = -1820 + scroll_position_X;
+
+            goal[1].pos.x = -1620 + scroll_position_X;
+            goal[4].pos.x = -1620 + scroll_position_X;
+            goal[7].pos.x = -1620 + scroll_position_X;
+
+            goal[2].pos.x = -1420 + scroll_position_X;
+            goal[5].pos.x = -1420 + scroll_position_X;
+            goal[8].pos.x = -1420 + scroll_position_X;
+            player_state = 0;
+            goal[9].moveAlg = 9;
         }
 
 
@@ -203,6 +239,7 @@ void goal_render()
         primitive::circle(goal[i].pos, goal[i].radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f });
 
     }
+        debug::setString("scrollX%f", scroll_position_X);
 }
 
 void setGoal0(OBJ2D* obj)
