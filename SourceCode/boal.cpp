@@ -53,7 +53,7 @@ void boal_update()
         //playerÇÃÉpÉâÉÅÅ[É^ê›íË
         boal = {};
         boal.timer = 0;
-        boal.pos = { SCREEN_W * 0.3f, GROUND_Y - 30};
+        boal.pos = {-780, GROUND_Y - 30};
         boal.scale = { 0.5f,0.5f };
         boal.texPos = { 0,0 };
         boal.texSize = { BOAL_TEX_W ,BOAL_TEX_H };
@@ -123,7 +123,7 @@ void boal_moveX()
     {
         //boal.pos.x += 0.05;
         //boal.pos.x += 0.2;
-        boal.pos.x += 1.0;
+        boal.pos.x += 1.5f;
 
     }
 
@@ -134,7 +134,7 @@ void boal_moveX()
         {
 
             boal.speed.x += 1.5f;
-            boal.speed.y += 1.5f;
+           boal.speed.y += 0.2f;
 
         }
         if (player_angle2 < 30)
@@ -149,7 +149,7 @@ void boal_moveX()
         }
         if (player_angle2 < 1)
         {
-            boal.speed.x += 3.5f;
+            boal.speed.x += 2.5f;
             boal.speed.y += 3.5f;
 
            
