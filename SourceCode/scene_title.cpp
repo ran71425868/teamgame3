@@ -3,9 +3,7 @@
 int title_state;
 int title_timer;
 
-Sprite* sprTitle1;
-Sprite* sprTitle2;
-Sprite* sprTitle_name;
+Sprite* sprTitle;
 Sprite* sprTitle_Push;
 
 void title_init() {
@@ -22,10 +20,9 @@ void title_update() {
 		//////// èâä˙ê›íË ////////
 
 		audio_init();
-		sprTitle1 = sprite_load(L"./Data/Images/title.png");
-	/*	sprTitle2 = sprite_load(L"./Data/Images/title_b.png");
-		sprTitle_name = sprite_load(L"./Data/Images/BPush.png");
-		sprTitle_Push = sprite_load(L"./Data/Images/Push.png");*/
+		sprTitle = sprite_load(L"./Data/Images/title.png");
+		sprTitle_Push = sprite_load(L"./Data/Images/Push.png");
+
 		title_state++;
 		/*fallthrough*/
 
@@ -55,7 +52,7 @@ void title_update() {
 void title_render() {
 	GameLib::clear(0, 0, 0);
 
-	//sprite_render(sprTitle_name, 200, 100, 3.0f, 3.0f);
+	sprite_render(sprTitle, 0, 0);
 
 	if (title_timer / 32 % 2 == 1) {
 		sprite_render(sprTitle_Push, 300, 800, 2.0f, 2.0f);
