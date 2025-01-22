@@ -62,6 +62,10 @@ void game_update()
 
 		music::play(1);
 		music::setVolume(1, 1.0f);
+		music::play(3,true);
+		music::setVolume(3, 0.2f);
+
+
 
 		score = 0;
 
@@ -138,3 +142,4 @@ void game_clear()
 {
 	nextScene = SCENE_RESULT;
 }
+

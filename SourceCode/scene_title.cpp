@@ -29,8 +29,8 @@ void title_update() {
 	case 1:
 		//////// ƒpƒ‰ƒ[ƒ^‚Ìİ’è ////////
 		GameLib::setBlendMode(Blender::BS_ALPHA);
-		music::play(0, true);
-		music::setVolume(2, 0.5f);
+		music::play(0);
+		music::setVolume(5, 1.0f);
 		title_state++;
 		/*fallthrough*/
 
@@ -38,6 +38,7 @@ void title_update() {
 		//////// ’Êí ////////
 		if (TRG(0) & PAD_START) {
 			music::play(0, false);
+			music::play(5, true);
 			nextScene = SCENE_TUTORIAL;
 			music::fade(0, 1);
 			break;
