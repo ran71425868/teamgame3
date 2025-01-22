@@ -110,7 +110,7 @@ void game_render() {
 	text_out(0, std::to_string(score), 1700, 500, 2, 2);
 	text_out(0, "combo", 1700, 550, 2, 2);
 	text_out(0, std::to_string(combo), 1700, 600, 2, 2);
-	debug::setString("scrollValue%f", scrollValue);
+	//debug::setString("scrollValue%f", scrollValue);
 }
 void game_score()
 {

@@ -40,6 +40,7 @@ extern float scrollValue;
 
 //OBJ2DŒ^‚Ì•Ï”player‚ğéŒ¾
 OBJ2D player;
+extern OBJ2D goal[GOAL_MAX];
 
 Sprite* sprBody;
 Sprite* sprLeftArm;
@@ -222,7 +223,7 @@ void player_update()
 
        body.x = right_waistX + footVec.x * dist;
        body.y = right_waistY + footVec.y * dist;
-       debug::setString("dist:%f", dist);
+       //debug::setString("dist:%f", dist);
 
 
         break;
@@ -369,6 +370,11 @@ void player_moveX()
         //ˆÚ“®ˆ—
         scrollValue += 2;
         scroll_position_X += 2;
+
+        for (int i = 0; i < 9; i++)
+        {
+            goal[i].pos.x += 2;
+        }
         
         //‰ñ“]‘¬“x
         player_angle2 += 1.0f;
@@ -380,6 +386,11 @@ void player_moveX()
             //ˆÚ“®’â~
             scrollValue -= 2;
             scroll_position_X -= 2;
+
+            for (int i = 0; i < 9; i++)
+            {
+                goal[i].pos.x -= 2;
+            }
         }
 
         //•G‚Ì‰Â“®ˆæ‚ğ’´‚¦‚È‚¢ˆ—
