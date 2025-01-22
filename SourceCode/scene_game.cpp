@@ -60,7 +60,7 @@ void game_update()
 	case 1:
 		GameLib::setBlendMode(Blender::BS_ALPHA);
 
-		music::play(1);
+		music::play(1, true);
 		music::setVolume(1, 0.5f);
 		music::play(3,true);
 		music::setVolume(3, 0.2f);
