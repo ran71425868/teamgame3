@@ -61,7 +61,7 @@ void game_update()
 		GameLib::setBlendMode(Blender::BS_ALPHA);
 
 		music::play(1);
-		music::setVolume(1, 1.0f);
+		music::setVolume(1, 0.5f);
 		music::play(3,true);
 		music::setVolume(3, 0.2f);
 
