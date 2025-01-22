@@ -60,8 +60,8 @@ void game_update()
 	case 1:
 		GameLib::setBlendMode(Blender::BS_ALPHA);
 
-		music::play(0);
-		music::setVolume(0, 0.1f);
+		music::play(1);
+		music::setVolume(1, 1.0f);
 
 		score = 0;
 

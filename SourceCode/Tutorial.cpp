@@ -18,7 +18,7 @@ void tutorial_init()
 }
 void tutorial_deinit() 
 {
-	music::stop(2);
+	music::stop(0);
 
 }
 
@@ -40,7 +40,7 @@ void tutorial_update() {
 	case 1:
 		//////// ÉpÉâÉÅÅ[É^ÇÃê›íË ////////
 		GameLib::setBlendMode(Blender::BS_ALPHA);
-		music::play(0);
+		music::play(0,false);
 		music::setVolume(2, 0.5f);
 		tutorial_state++;
 		/*fallthrough*/
@@ -88,6 +88,7 @@ void tutorial_render()
 		sprite_render(sprTutorial4, 0, 0);
 		music::play(4, false);
 		nextScene = SCENE_GAME;
+		music::fade(0, 1);
 		break;
 	}
 

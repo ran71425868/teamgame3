@@ -11,7 +11,7 @@ void title_init() {
 	title_timer = 0;
 }
 void title_deinit() {
-	music::stop(2);
+	music::stop(0);
 
 }
 void title_update() {
@@ -29,7 +29,7 @@ void title_update() {
 	case 1:
 		//////// ƒpƒ‰ƒ[ƒ^‚Ìİ’è ////////
 		GameLib::setBlendMode(Blender::BS_ALPHA);
-		music::play(0);
+		music::play(0, true);
 		music::setVolume(2, 0.5f);
 		title_state++;
 		/*fallthrough*/
@@ -37,8 +37,9 @@ void title_update() {
 	case 2:
 		//////// ’Êí ////////
 		if (TRG(0) & PAD_START) {
-			music::play(4, false);
+			music::play(0, false);
 			nextScene = SCENE_TUTORIAL;
+			music::fade(0, 1);
 			break;
 		}
 
