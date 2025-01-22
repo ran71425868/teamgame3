@@ -13,11 +13,13 @@
 #include "boal.h"
 #include "goal.h"
 #include "judge.h"
+#include "Tutorial.h"
 
 #include "scene_game.h"
 
 #include "scene_title.h"
 #include "scene_result.h"
+
 
 using namespace GameLib;// using ディレクティブ
 using namespace input;
