@@ -370,6 +370,7 @@ void player_moveX()
         //ˆÚ“®ˆ—
         scrollValue += 2;
         scroll_position_X += 2;
+        boal.pos.x += 2;
 
         for (int i = 0; i < 9; i++)
         {
@@ -386,6 +387,7 @@ void player_moveX()
             //ˆÚ“®’â~
             scrollValue -= 2;
             scroll_position_X -= 2;
+            boal.pos.x -= 2;
 
             for (int i = 0; i < 9; i++)
             {
@@ -400,8 +402,22 @@ void player_moveX()
             //ˆÚ“®’â~
             scrollValue -= 2;
             scroll_position_X -= 2;
+            boal.pos.x -= 2;
+
+            for (int i = 0; i < 9; i++)
+            {
+                goal[i].pos.x -= 2;
+            }
         }
            
+        if (scrollValue > 1920)
+        {
+            scrollValue = 1920;
+            for (int i = 0; i < 9; i++)
+            {
+                goal[i].pos.x = 1920;
+            }
+        }
     }
 
     //‰E‘«‚ğŒã‚ë‚É“®‚©‚·ˆ—
@@ -431,6 +447,12 @@ void player_moveX()
         //ˆÚ“®ˆ—
         scrollValue += 2;
         scroll_position_X += 2;
+        boal.pos.x += 2;
+
+        for (int i = 0; i < 9; i++)
+        {
+            goal[i].pos.x += 2;
+        }
         //‰ñ“]‘¬“x
         player_angle4 += 1.0f;
 
@@ -441,6 +463,12 @@ void player_moveX()
             //ˆÚ“®’â~
             scrollValue -= 2;
             scroll_position_X -= 2;
+            boal.pos.x -= 2;
+
+            for (int i = 0; i < 9; i++)
+            {
+                goal[i].pos.x -= 2;
+            }
         }
 
         //•G‚Ì‰Â“®ˆæ‚ğ’´‚¦‚È‚¢ˆ—
@@ -450,6 +478,12 @@ void player_moveX()
             //ˆÚ“®’â~
             scrollValue -= 2;
             scroll_position_X -= 2;
+            boal.pos.x -= 2;
+
+            for (int i = 0; i < 9; i++)
+            {
+                goal[i].pos.x -= 2;
+            }
         }
     }
 

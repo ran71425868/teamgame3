@@ -119,13 +119,6 @@ void boal_render()
 }
 void boal_moveX()
 {
-    if (STATE(0) & PAD_LEFT)
-    {
-        //boal.pos.x += 0.05;
-        //boal.pos.x += 0.2;
-        boal.pos.x += 1.5f;
-
-    }
 
     if (hitCheck(&boal, &goal[9]))
     {

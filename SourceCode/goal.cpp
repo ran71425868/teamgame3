@@ -121,48 +121,6 @@ void goal_update()
 
     case 2:
 
-        if (STATE(0) & PAD_LEFT && !(STATE(0) & PAD_RIGHT))
-        {
-            for (int i = 0; i < 9; i++) {
-                goal[i].pos.x += 1.5;
-
-                //‰E‘«‚ğ‘O‚É‚·‚éŒÀŠE’l‚É‚È‚Á‚½‚çƒS[ƒ‹~‚ß‚é
-                if (player_angle2 > 40.0f)
-                {
-                    //ˆÚ“®’â~
-                    goal[i].pos.x -= 2;
-                }
-                //•G‚Ì‰Â“®ˆæ‚ğ’´‚¦‚È‚¢‚ÆƒS[ƒ‹‚ğ~‚ß‚éˆ—
-                if (player_angle <= 40.0f && player_angle2 > 0)
-                {
-                    //ˆÚ“®’â~
-                    goal[i].pos.x -= 2;
-                }
-            }
-        }
-
-        if (STATE(0) & PAD_L3 && !(STATE(0) & PAD_R3))
-        {
-            for (int i = 0; i < 9; i++) {
-                goal[i].pos.x += 2;
-                //¶‘«‚ğ‘O‚É‚·‚éŒÀŠE’l
-                if (player_angle4 > 60.0f)
-                {
-                    //ˆÚ“®’â~
-                    goal[i].pos.x -= 2;
-                }
-
-                //•G‚Ì‰Â“®ˆæ‚ğ’´‚¦‚È‚¢ˆ—
-                if (player_angle3 <= 40.0f && player_angle4 > 0)
-                {
-                   
-                    //ˆÚ“®’â~
-                    goal[i].pos.x -= 2;
-                }
-
-            }
-        }
-
         if (STATE(0) & PAD_TRG1)
         {
             scrollValue = 1920;
