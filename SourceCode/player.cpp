@@ -413,11 +413,21 @@ void player_moveX()
         if (scrollValue > 1920)
         {
             scrollValue = 1920;
-            for (int i = 0; i < 9; i++)
-            {
-                goal[i].pos.x = 1920;
-            }
+            
+            goal[0].pos.x = scrollValue - scrollValue + 100;
+            goal[3].pos.x = scrollValue - scrollValue + 100;
+            goal[6].pos.x = scrollValue - scrollValue + 100;
+
+            goal[1].pos.x = scrollValue - scrollValue + 300;
+            goal[4].pos.x = scrollValue - scrollValue + 300;
+            goal[7].pos.x = scrollValue - scrollValue + 300;
+
+            goal[2].pos.x = scrollValue - scrollValue + 500;
+            goal[5].pos.x = scrollValue - scrollValue + 500;
+            goal[8].pos.x = scrollValue - scrollValue + 500;
         }
+
+
     }
 
     //‰E‘«‚ðŒã‚ë‚É“®‚©‚·ˆ—
@@ -484,6 +494,23 @@ void player_moveX()
             {
                 goal[i].pos.x -= 2;
             }
+        }
+
+        if (scrollValue > 1920)
+        {
+            scrollValue = 1920;
+            
+            goal[0].pos.x = scrollValue - scrollValue + 100;
+            goal[3].pos.x = scrollValue - scrollValue + 100;
+            goal[6].pos.x = scrollValue - scrollValue + 100;
+
+            goal[1].pos.x = scrollValue - scrollValue + 300;
+            goal[4].pos.x = scrollValue - scrollValue + 300;
+            goal[7].pos.x = scrollValue - scrollValue + 300;
+
+            goal[2].pos.x = scrollValue - scrollValue + 500;
+            goal[5].pos.x = scrollValue - scrollValue + 500;
+            goal[8].pos.x = scrollValue - scrollValue + 500;
         }
     }
 

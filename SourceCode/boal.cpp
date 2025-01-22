@@ -3,6 +3,11 @@
 
 int boal_state;
 float speed;
+bool boalground;
+
+int boalflug;
+int boalCount;
+
 extern OBJ2D goal[GOAL_MAX];
 
 extern float scrollValue;
@@ -21,6 +26,8 @@ void boal_init()
     //boal_stateを0
     boal_state = 0;
     speed = 0;
+    boalflug = 0;
+    boalCount = 3;
 }
 //--------------------------------------
 //  プレイヤーの終了処理
@@ -53,7 +60,7 @@ void boal_update()
         //playerのパラメータ設定
         boal = {};
         boal.timer = 0;
-        boal.pos = {-780, GROUND_Y - 30};
+        boal.pos = {0, GROUND_Y - 30};
         boal.scale = { 0.5f,0.5f };
         boal.texPos = { 0,0 };
         boal.texSize = { BOAL_TEX_W ,BOAL_TEX_H };
@@ -72,32 +79,19 @@ void boal_update()
 
         //player_moveX・Yを呼ぶ
         boal_moveY();
-        boal_moveX();
 
         // 位置に速度を足す
-        //player.pos += player.speed;
-
-        // プレイヤーの上下左右のエリアチェック
-        /*if (player.pos.x < 100 + WALL_RIGHT) {
-            player.pos.x = 100 + WALL_RIGHT;
-        }
-        if (player.pos.x > WALL_LEFT - 100) {
-            player.pos.x = WALL_LEFT - 100;
-        }*/
-
-        /*if (player.pos.y + sinf(ToRadian(player_angle+90.0))*128.0f > WALL_DOWN) {
-            player.pos.y = WALL_DOWN;
-        }*/
-
-        /*if (player.pos.y + 640.0f > GROUND_Y) {
-            player.pos.y = GROUND_Y - 640.0f;
-            if (player_angle > 20.0f) {
-
-            }
-        }*/
+        boal.pos += boal.speed;
         
-            boal.pos.x -= boal.speed.x;
-            boal.pos.y -= boal.speed.y;
+        boalground = false;
+        if (boal.pos.y > 970)
+        {
+            boal.speed.y = 0.0f;
+            boal.pos.y = 970;
+            boalground = true;
+        }
+
+        
         break;
     }
 }
@@ -116,52 +110,28 @@ void boal_render()
     primitive::circle(boal.pos,
         boal.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f }
     );
+    debug::setString("boalflug%d", boalflug);
+    debug::setString("boalCount%d", boalCount);
+   
 }
 void boal_moveX()
 {
-
-    if (hitCheck(&boal, &goal[9]))
+    boalflug = 1;
+    /*if (boal.pos.y >= 970)
     {
-
-        if (player_angle2 < 60)
-        {
-
-            boal.speed.x += 1.5f;
-           boal.speed.y += 0.2f;
-
-        }
-        if (player_angle2 < 30)
-        {
-            /* for (int i = 0; i < SCREEN_W; i++)
-             {
-             }*/
-
-            boal.speed.x += 1.0f;
-            boal.speed.y += 1.0f;
-
-        }
-        if (player_angle2 < 1)
-        {
-            boal.speed.x += 2.5f;
-            boal.speed.y += 3.5f;
-
-           
-        }
-        /*else
-        {
-            boal.pos.x += 0;
-            boal.pos.y += 0;
-
-         
-        }*/
+        if (boalCount > 0)
+            boalCount -= 1;
+    }*/
+    if (boalflug > 0 && boal.pos.y >= 970)
+    {
+        boal.speed.x = 0.0f;
     }
 }
+
 void boal_moveY()
 {
-    //if (STATE(0) & PAD_UP && !(STATE(0) & PAD_DOWN))
-    //{
-    //    boal.pos.y -= 1;
-    //}
+    boal.speed.y += GRAVITY;
+    
 
 }
 

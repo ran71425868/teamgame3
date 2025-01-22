@@ -8,6 +8,7 @@
 using namespace std;
 
 extern OBJ2D goal[GOAL_MAX];
+extern OBJ2D boal;
 
 
 int game_state;
@@ -18,8 +19,6 @@ float playerY;
 
 int score;
 int goalflug;
-float comboscore;
-int combo;
 
 Sprite* sprBack;
 
@@ -33,8 +32,6 @@ void game_init() {
 	game_state = 0;
 	game_timer = 0;
 	score = 0;
-	combo = 0;
-	comboscore = 1.0f;
 	goalflug = 0;
 }
 void game_deinit() {
@@ -103,15 +100,37 @@ void game_render() {
 	boal_render();
 	
 
-	/*text_out(0, "score", 1700, 450, 2, 2);
+	text_out(0, "score", 1700, 450, 2, 2);
 	text_out(0, std::to_string(score), 1700, 500, 2, 2);
-	text_out(0, "combo", 1700, 550, 2, 2);
-	text_out(0, std::to_string(combo), 1700, 600, 2, 2);*/
-	//debug::setString("scrollValue%f", scrollValue);
 }
 void game_score()
 {
-	score = 10;
+	score += 10;
+
+	if (goal[0].moveAlg == -1 && goal[1].moveAlg == -1 && goal[2].moveAlg == -1) {
+		score += 50;
+	}
+	if (goal[3].moveAlg == -1 && goal[4].moveAlg == -1 && goal[5].moveAlg == -1) {
+		score += 50;
+	}
+	if (goal[6].moveAlg == -1 && goal[7].moveAlg == -1 && goal[8].moveAlg == -1) {
+		score += 50;
+	}
+	if (goal[0].moveAlg == -1 && goal[3].moveAlg == -1 && goal[6].moveAlg == -1) {
+		score += 50;
+	}
+	if (goal[1].moveAlg == -1 && goal[4].moveAlg == -1 && goal[7].moveAlg == -1) {
+		score += 50;
+	}
+	if (goal[2].moveAlg == -1 && goal[5].moveAlg == -1 && goal[8].moveAlg == -1) {
+		score += 50;
+	}
+	if (goal[0].moveAlg == -1 && goal[4].moveAlg == -1 && goal[8].moveAlg == -1) {
+		score += 50;
+	}
+	if (goal[2].moveAlg == -1 && goal[4].moveAlg == -1 && goal[6].moveAlg == -1) {
+		score += 50;
+	}
 
 }
 
