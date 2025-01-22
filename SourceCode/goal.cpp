@@ -200,7 +200,7 @@ void goal_update()
             goal[8].pos.x = -1420 + scroll_position_X;
             player_state = 0;
             goal[9].moveAlg = 9;
-            boal.moveAlg = 0;
+            boal.moveAlg = 1;
         }
 
 
