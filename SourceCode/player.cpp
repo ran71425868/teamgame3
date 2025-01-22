@@ -164,29 +164,26 @@ void player_update()
        left_foot_PosX = left_footX + cosf(ToRadian(player_angle4 - 90.0)) * 128.0f;
        left_foot_PosY = left_footY + sinf(ToRadian(player_angle4 - 90.0)) * 128.0f;
 
-
        
        if (right_footY > GROUND_Y)
        {
            right_footY = GROUND_Y;
-           if (right_footX == GROUND_Y) 
-           {
-               right_ground = true;
-               player.speed.y = 0.0f;
+          
+           right_ground = true;
+           player.speed.y = 0.0f;
 
-           }
+           
        }
+
        if (left_footY > GROUND_Y)
        {
            left_footY = GROUND_Y;
-           if (left_footY == GROUND_Y)
-           {
-               left_ground = true;
-               player.speed.y = 0.0f;
+         
+           left_ground = true;
+           player.speed.y = 0.0f;
 
-           }
        }
-       
+
        else
        {
            right_ground = false;
@@ -239,12 +236,12 @@ void player_render()
     
      
     //ç∂òr
-    //sprite_render(sprLeftArm, player.pos.x, player.pos.y, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
-        //ToRadian(0), player.color.x, player.color.y);
+    sprite_render(sprLeftArm, body.x + 90, body.y - 150, player.scale.x * 1.5, player.scale.y * 1.5, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
+        ToRadian(0), player.color.x, player.color.y);
      
     //âEòr
-    //sprite_render(sprRightArm, player.pos.x, player.pos.y, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
-        //ToRadian(0), player.color.x, player.color.y);
+    sprite_render(sprRightArm, body.x-100, body.y-160, player.scale.x * 2, player.scale.y*2, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
+        ToRadian(0), player.color.x, player.color.y);
      
     // âEëæÇ‡Ç‡
     sprite_render(sprThighs, right_waistX, right_waistY, player.scale.x, player.scale.y, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y,
@@ -264,10 +261,7 @@ void player_render()
     sprite_render(sprBody, body.x, body.y, player.scale.x * 2.8, player.scale.y * 2.8, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y + player.texSize.y - 20.0f,
         ToRadian(0), player.color.x, player.color.y);
 
-    primitive::rect(0,GROUND_Y, 1920, 80,0,0, ToRadian(0), 0, 1, 0);
-
-    primitive::circle({ right_knee_PosX ,right_knee_PosY }, player.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f });
-    
+    //primitive::rect(0,GROUND_Y, 1920, 80,0,0, ToRadian(0), 0, 1, 0);
    
 }
 
@@ -394,6 +388,7 @@ void player_moveX()
             player_angle2 -= 1.0f;
             //à⁄ìÆí‚é~
             scrollValue -= 2;
+            scroll_position_X -= 2;
         }
            
     }
@@ -424,6 +419,7 @@ void player_moveX()
     {
         //à⁄ìÆèàóù
         scrollValue += 2;
+        scroll_position_X += 2;
         //âÒì]ë¨ìx
         player_angle4 += 1.0f;
 
@@ -433,6 +429,7 @@ void player_moveX()
             player_angle4 = 60.0f;
             //à⁄ìÆí‚é~
             scrollValue -= 2;
+            scroll_position_X -= 2;
         }
 
         //ïGÇÃâ¬ìÆàÊÇí¥Ç¶Ç»Ç¢èàóù
@@ -441,6 +438,7 @@ void player_moveX()
             player_angle4 -= 1.0f;
             //à⁄ìÆí‚é~
             scrollValue -= 2;
+            scroll_position_X -= 2;
         }
     }
 
