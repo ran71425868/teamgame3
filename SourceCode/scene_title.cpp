@@ -38,7 +38,7 @@ void title_update() {
 		//////// �ʏ펞 ////////
 		if (TRG(0) & PAD_START) {
 			music::play(4, false);
-			nextScene = SCENE_GAME;
+			nextScene = SCENE_TUTORIAL;
 			break;
 		}
 

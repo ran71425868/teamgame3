@@ -28,10 +28,10 @@ void tutorial_update() {
 		//////// 初期設定 ////////
 
 		audio_init();
-		sprTutorial = sprite_load(L"./Data/Images/tutorial.png");
-		sprTutorial2 = sprite_load(L"./Data/Images/tutorial2.png");
-		sprTutorial3 = sprite_load(L"./Data/Images/tutorial3.png");
-		sprTutorial4 = sprite_load(L"./Data/Images/tutorial4.png");
+		sprTutorial = sprite_load(L"./Data/Images/Tutorial.png");
+		sprTutorial2 = sprite_load(L"./Data/Images/Tutorial2.png");
+		sprTutorial3 = sprite_load(L"./Data/Images/Tutorial3.png");
+		sprTutorial4 = sprite_load(L"./Data/Images/Tutorial4.png");
 	
 
 		tutorial_state++;
@@ -47,11 +47,7 @@ void tutorial_update() {
 
 	case 2:
 		//////// 通常時 ////////
-		if (TRG(0) & PAD_START&&counter==3) {
-			music::play(4, false);
-			nextScene = SCENE_GAME;
-			break;
-		}
+		
 
 		break;
 	}
@@ -62,9 +58,33 @@ void tutorial_update() {
 }
 void tutorial_render()
 {
+
 	GameLib::clear(0, 0, 0);
+	
+	if (TRG(0) & PAD_START)
+	{
+		counter++;
+		//カウンターが４を超えたら４にするif文
+	}
+	switch (counter)
+	{
+	case 0:
+		sprite_render(sprTutorial, 0, 0);
+		break;
+	case 1:
+		sprite_render(sprTutorial2, 0, 0);
+		break;
+	case 2:
+		sprite_render(sprTutorial3, 0, 0);
+		break;
+	case 3:
+		sprite_render(sprTutorial4, 0, 0);
+		break;
+	case 4:
+		music::play(4, false);
+		nextScene = SCENE_GAME;
+		break;
+	}
 
-	sprite_render(sprTutorial, 0, 0);
-
-
+	debug::setString("counter%d", counter);
 }
