@@ -65,6 +65,10 @@ void tutorial_render()
 	{
 		counter++;
 		//ƒJƒEƒ“ƒ^[‚ª‚S‚ð’´‚¦‚½‚ç‚S‚É‚·‚éif•¶
+		if (counter > 4)
+		{
+			counter == 4;
+		}
 	}
 	switch (counter)
 	{
@@ -81,6 +85,7 @@ void tutorial_render()
 		sprite_render(sprTutorial4, 0, 0);
 		break;
 	case 4:
+		sprite_render(sprTutorial4, 0, 0);
 		music::play(4, false);
 		nextScene = SCENE_GAME;
 		break;
