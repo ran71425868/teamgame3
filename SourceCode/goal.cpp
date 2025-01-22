@@ -119,7 +119,8 @@ void goal_update()
         if (STATE(0) & PAD_LEFT && !(STATE(0) & PAD_RIGHT))
         {
             for (int i = 0; i < 9; i++) {
-                goal[i].pos.x += 2;
+                goal[i].pos.x += 1.5;
+
                 //‰E‘«‚ð‘O‚É‚·‚éŒÀŠE’l‚É‚È‚Á‚½‚çƒS[ƒ‹Ž~‚ß‚é
                 if (player_angle2 > 40.0f)
                 {
