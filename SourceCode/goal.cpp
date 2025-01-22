@@ -272,7 +272,7 @@ void goal_render()
             goal[i].color.x, goal[i].color.y,
             goal[i].color.z, goal[i].color.w);
 
-        primitive::circle(goal[i].pos, goal[i].radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f });
+        //primitive::circle(goal[i].pos, goal[i].radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f });
 
     }
         //debug::setString("scrollX%f", scroll_position_X);
