@@ -13,10 +13,10 @@
 
 // XWB‚ÌŽí—Þ
 #define XWB_SYSTEM          0
+#define XWB_SE			1
 
 // SYSTEM‚ÌŒø‰Ê‰¹
 #define XWB_SYSTEM_DONPATU    0
-
 
 //------< ŠÖ” >----------------------------------------------------------------
 void audio_init();
