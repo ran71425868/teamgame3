@@ -53,7 +53,9 @@ void title_render() {
 	GameLib::clear(0, 0, 0);
 
 	sprite_render(sprTitle, 0, 0);
-
+	//ƒ^ƒCƒgƒ‹
+	GameLib::text_out(5, "EXCITING SOCCER", 1800, 100, 3.5f, 3.5f, 1, 1, 1, 1, TEXT_ALIGN::UPPER_RIGHT);
+	GameLib::text_out(5, "EXCITING SOCCER", 1800, 100, 3.6f, 3.6f, 0, 0, 0, 1, TEXT_ALIGN::UPPER_RIGHT);
 	if (title_timer / 32 % 2 == 1) {
 		sprite_render(sprTitle_Push, 300, 800, 2.0f, 2.0f);
 	}
