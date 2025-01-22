@@ -4,14 +4,19 @@ int goal_state;
 float angle;
 
 extern int player_state;
+
+extern float player_angle;
 extern float player_angle2;
+extern float player_angle3;
+extern float player_angle4;
+
 extern float right_footX;
 extern float right_footY;
 
 extern float scrollValue; 
 extern float scroll_position_X;
 
-
+extern OBJ2D boal;
 
 struct GOAL_DATA {
     Sprite* spr;
@@ -126,6 +131,34 @@ void goal_update()
                     //ˆÚ“®’â~
                     goal[i].pos.x -= 2;
                 }
+                //•G‚Ì‰Â“®ˆæ‚ğ’´‚¦‚È‚¢‚ÆƒS[ƒ‹‚ğ~‚ß‚éˆ—
+                if (player_angle <= 40.0f && player_angle2 > 0)
+                {
+                    //ˆÚ“®’â~
+                    goal[i].pos.x -= 2;
+                }
+            }
+        }
+
+        if (STATE(0) & PAD_L3 && !(STATE(0) & PAD_R3))
+        {
+            for (int i = 0; i < 9; i++) {
+                goal[i].pos.x += 2;
+                //¶‘«‚ğ‘O‚É‚·‚éŒÀŠE’l
+                if (player_angle4 > 60.0f)
+                {
+                    //ˆÚ“®’â~
+                    goal[i].pos.x -= 2;
+                }
+
+                //•G‚Ì‰Â“®ˆæ‚ğ’´‚¦‚È‚¢ˆ—
+                if (player_angle3 <= 40.0f && player_angle4 > 0)
+                {
+                   
+                    //ˆÚ“®’â~
+                    goal[i].pos.x -= 2;
+                }
+
             }
         }
 
@@ -147,6 +180,7 @@ void goal_update()
 
             player_deinit();
             goal[9].moveAlg = -1;
+            boal.moveAlg = -1;
         }
 
         if (STATE(0) & PAD_START)
@@ -166,6 +200,7 @@ void goal_update()
             goal[8].pos.x = -1420 + scroll_position_X;
             player_state = 0;
             goal[9].moveAlg = 9;
+            boal.moveAlg = 0;
         }
 
 
