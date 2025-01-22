@@ -51,12 +51,20 @@ int APIENTRY wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int) {
 				result_deinit();
 				break;
 
+			case SCENE_TUTORIAL:
+				tutorial_deinit();
+				break;
+
 			}
 
 			// éüÇÃÉVÅ[ÉìÇ…âûÇ∂ÇΩèâä˙ê›íËèàóù
 			switch (nextScene) {
 			case SCENE_TITLE:
 				title_init();
+				break;
+
+			case SCENE_TUTORIAL:
+				tutorial_init();
 				break;
 
 			case SCENE_GAME:
@@ -80,6 +88,11 @@ int APIENTRY wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int) {
 		case SCENE_TITLE:
 			title_update();
 			title_render();
+			break;
+
+		case SCENE_TUTORIAL:
+			tutorial_update();
+			tutorial_render();
 			break;
 
 		case SCENE_GAME:
@@ -106,6 +119,10 @@ int APIENTRY wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int) {
 
 	case SCENE_TITLE:
 		title_deinit();
+		break;
+
+	case SCENE_TUTORIAL:
+		tutorial_deinit();
 		break;
 
 	case SCENE_GAME:

@@ -1,5 +1,5 @@
 
-#ifndef SCENE_TUTORIAL 
+#ifndef SCENE_TUTORIAL_H
 #define SCENE_TUTORIAL_H 
 
 // 関数のプロトタイプ宣言 
