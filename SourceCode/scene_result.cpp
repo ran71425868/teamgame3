@@ -15,6 +15,9 @@ void result_init() {
 
 void result_deinit() {
 
+	safe_delete(sprResult);
+	safe_delete(sprScore);
+	safe_delete(sprGame_clear);
 	music::stop(1);
 }
 
@@ -40,10 +43,10 @@ void result_update() {
 		/*fallthrough*/
 
 	case 2:
-	/*	if (TRG(0) & PAD_START) {
+		if (TRG(0) & PAD_START) {
 			nextScene = SCENE_TITLE;
 			break;
-		}*/
+		}
 		break;
 	}
 	result_timer++;

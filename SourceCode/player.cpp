@@ -265,9 +265,6 @@ void player_render()
     sprite_render(sprBody, body.x, body.y, player.scale.x * 2.8, player.scale.y * 2.8, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y + player.texSize.y - 20.0f,
         ToRadian(0), player.color.x, player.color.y);
 
-    debug::setString("right_ground%d", right_ground);
-    debug::setString("left_ground%d", left_ground);
-
 }
 
 void player_moveY()
@@ -427,6 +424,7 @@ void player_moveX()
     {
         //‰ñ“]‘¬“x
         player_angle2 += 1.0f;
+        goal[9].angle += player_angle2;
 
         //‰E‘«‚ð‘O‚É‚·‚éŒÀŠE’l
         if (player_angle2 > 40.0f) 
@@ -456,7 +454,6 @@ void player_moveX()
             goal[5].pos.x = scrollValue - scrollValue + 500;
             goal[8].pos.x = scrollValue - scrollValue + 500;
         }
-
 
     }
 

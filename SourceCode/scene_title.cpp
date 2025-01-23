@@ -3,6 +3,8 @@
 int title_state;
 int title_timer;
 
+extern int title;
+
 Sprite* sprTitle;
 Sprite* sprTitle_Push;
 
@@ -10,10 +12,15 @@ void title_init() {
 	title_state = 0;
 	title_timer = 0;
 }
+
 void title_deinit() {
+
+	safe_delete(sprTitle);
+	safe_delete(sprTitle_Push);
 	music::stop(0);
 
 }
+
 void title_update() {
 	switch (title_state) {
 	case 0:
@@ -31,16 +38,17 @@ void title_update() {
 		GameLib::setBlendMode(Blender::BS_ALPHA);
 		music::play(0);
 		music::setVolume(0, 0.1f);
-		music::setVolume(5, 1.0f);
+
 		title_state++;
 		/*fallthrough*/
 
 	case 2:
 		//////// �ʏ펞 ////////
-		if (TRG(0) & PAD_START) 
+		if (TRG(0) & PAD_START&&title==0)
 		{
 			music::play(0, false);
 			sound::play(XWB_SE, XWB_SE_KETTEI);
+			title = 1;
 
 			nextScene = SCENE_TUTORIAL;
 			music::fade(0, 1);
@@ -50,10 +58,9 @@ void title_update() {
 		break;
 	}
 
-
-
 	title_timer++;
 }
+
 void title_render() {
 	GameLib::clear(0, 0, 0);
 

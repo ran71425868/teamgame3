@@ -197,8 +197,8 @@ void boal_render()
     
     text_out(0, "power *", 1400, 150, 2, 2);
     text_out(0, std::to_string(power), 1700, 150, 2, 2);
-    text_out(0, "boll *", 1500, 50, 2, 2);
-    text_out(0, std::to_string(boalCount), 1700, 50, 2, 2);
+    text_out(0, "boll *", 1600, 50, 2, 2);
+    text_out(0, std::to_string(boalCount), 1800, 50, 2, 2);
    
 }
 

@@ -7,6 +7,8 @@
 
 using namespace std;
 
+int title=0;
+
 extern OBJ2D goal[GOAL_MAX];
 extern OBJ2D boal;
 
@@ -36,6 +38,7 @@ void game_init() {
 	cooldown = 4;
 }
 void game_deinit() {
+	safe_delete(sprBack);
 	music::stop(0);
 	player_deinit();
 	goal_deinit();
