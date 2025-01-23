@@ -12,7 +12,7 @@ extern OBJ2D boal;
 
 int game_state;
 int game_timer;
-int cooldown;
+float cooldown;
 
 float playerX;
 float playerY;
@@ -33,7 +33,7 @@ void game_init() {
 	game_timer = 0;
 	score = 0;
 	goalflug = 0;
-	cooldown = 3;
+	cooldown = 4;
 }
 void game_deinit() {
 	music::stop(0);
@@ -62,7 +62,7 @@ void game_update()
 		GameLib::setBlendMode(Blender::BS_ALPHA);
 
 		music::play(1, true);
-		music::setVolume(1, 0.1f);
+		music::setVolume(1, 0.2f);
 		sound::play(XWB_SE, XWB_SE_KANSEI);
 		
 
@@ -84,7 +84,7 @@ void game_update()
 			{
 
 				sound::play(XWB_SE, XWB_SE_KANSEI);
-				cooldown = 2;
+				cooldown = 2.5;
 			}
 		}
 
