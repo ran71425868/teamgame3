@@ -7,9 +7,9 @@ using namespace GameLib;
 // ƒV[ƒ“‚Ìƒ‰ƒxƒ‹
 #define SCENE_NONE -1 
 #define SCENE_TITLE 0 
-#define SCENE_GAME 1 
-#define SCENE_RESULT 2
-#define SCENE_TUTORIAL 3
+#define SCENE_TUTORIAL 1
+#define SCENE_GAME 2 
+#define SCENE_RESULT 3
 
 //’è”
 extern const FLOAT PI;

@@ -10,9 +10,9 @@ using namespace std;
 extern OBJ2D goal[GOAL_MAX];
 extern OBJ2D boal;
 
-
 int game_state;
 int game_timer;
+int cooldown;
 
 float playerX;
 float playerY;
@@ -33,6 +33,7 @@ void game_init() {
 	game_timer = 0;
 	score = 0;
 	goalflug = 0;
+	cooldown = 3;
 }
 void game_deinit() {
 	music::stop(0);
@@ -61,9 +62,9 @@ void game_update()
 		GameLib::setBlendMode(Blender::BS_ALPHA);
 
 		music::play(1, true);
-		music::setVolume(1, 0.5f);
-		music::play(3,true);
-		music::setVolume(3, 0.2f);
+		music::setVolume(1, 0.1f);
+		sound::play(XWB_SE, XWB_SE_KANSEI);
+		
 
 
 
@@ -73,9 +74,18 @@ void game_update()
 		/*fallthrough*/
 
 	case 2:
-		if (TRG(0) & PAD_SELECT) {
-			nextScene = SCENE_TITLE;
-			break;
+		if (game_timer % 100 == 0)
+		{
+			if (cooldown > 0)
+			{
+				cooldown--;
+			}
+			else if (cooldown <= 0)
+			{
+
+				sound::play(XWB_SE, XWB_SE_KANSEI);
+				cooldown = 2;
+			}
 		}
 
 		player_update();
@@ -85,6 +95,7 @@ void game_update()
 		
 		judge();
 		
+		game_timer++;
 
 		break;
 	}

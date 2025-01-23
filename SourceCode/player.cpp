@@ -21,12 +21,6 @@ float right_knee_PosY;
 float left_knee_PosX;
 float left_knee_PosY;
 
-//右足
-float right_foot_PosX;
-float right_foot_PosY;
-//左足
-float left_foot_PosX;
-float left_foot_PosY;
 
 float right_footX;
 float right_footY;
@@ -83,6 +77,7 @@ void player_deinit()
 
 bool right_ground = false;
 bool left_ground = false;
+
 VECTOR2 body;
 void player_update()
 {
@@ -155,16 +150,6 @@ void player_update()
        //左足
        left_footX = left_knee_PosX + cosf(ToRadian(player_angle4 + 90.0)) * 128.0f;
        left_footY = left_knee_PosY + sinf(ToRadian(player_angle4 + 90.0)) * 128.0f;
-
-       //足先から見た膝の座標
-       //右足
-       right_foot_PosX =right_footX + cosf(ToRadian(player_angle2 - 90.0)) * 128.0f;
-       right_foot_PosY =right_footY + sinf(ToRadian(player_angle2 - 90.0)) * 128.0f;
-
-       //左足
-       left_foot_PosX = left_footX + cosf(ToRadian(player_angle4 - 90.0)) * 128.0f;
-       left_foot_PosY = left_footY + sinf(ToRadian(player_angle4 - 90.0)) * 128.0f;
-
        
        if (right_footY > GROUND_Y)
        {
@@ -173,7 +158,14 @@ void player_update()
            right_ground = true;
            player.speed.y = 0.0f;
 
+           player_angle3;
+
            
+       }
+
+       else
+       {
+            right_ground = false;
        }
 
        if (left_footY > GROUND_Y)
@@ -187,7 +179,7 @@ void player_update()
 
        else
        {
-           right_ground = false;
+           
            left_ground = false;
        }
 
@@ -200,17 +192,15 @@ void player_update()
        left_knee_PosX = left_footX + cosf(ToRadian(player_angle4 - 90.0)) * 128.0f;
        left_knee_PosY = left_footY + sinf(ToRadian(player_angle4 - 90.0)) * 128.0f;
 
-       right_foot_PosY = right_knee_PosY;
-       left_foot_PosY = left_knee_PosY;
-
        //太もも固定
        //右足
-       right_waistX = right_foot_PosX + cosf(ToRadian(player_angle - 90.0)) * 128.0f;
-       right_waistY = right_foot_PosY + sinf(ToRadian(player_angle - 90.0)) * 128.0f;
+       right_waistX = right_knee_PosX + cosf(ToRadian(player_angle - 90.0)) * 128.0f;
+       right_waistY = right_knee_PosY + sinf(ToRadian(player_angle - 90.0)) * 128.0f;
        
        //左足
-       left_waistX = left_foot_PosX + cosf(ToRadian(player_angle3 - 90.0)) * 128.0f;
-       left_waistY = left_foot_PosY + sinf(ToRadian(player_angle3 - 90.0)) * 128.0f;
+       left_waistX = left_knee_PosX + cosf(ToRadian(player_angle3 - 90.0)) * 128.0f;
+       left_waistY = left_knee_PosY + sinf(ToRadian(player_angle3 - 90.0)) * 128.0f;
+
 
        // 右足→左足のベクトル
        VECTOR2 footVec(left_waistX - right_waistX, left_waistY - right_waistY);
@@ -223,9 +213,8 @@ void player_update()
 
        body.x = right_waistX + footVec.x * dist;
        body.y = right_waistY + footVec.y * dist;
-       //debug::setString("dist:%f", dist);
 
-
+       // 前のフレームで地面に接地したか
         break;
        
     }
@@ -262,16 +251,19 @@ void player_render()
     sprite_render(sprBody, body.x, body.y, player.scale.x * 2.8, player.scale.y * 2.8, player.texPos.x, player.texPos.y, player.texSize.x, player.texSize.y, player.pivot.x, player.pivot.y + player.texSize.y - 20.0f,
         ToRadian(0), player.color.x, player.color.y);
 
-    //primitive::rect(0,GROUND_Y, 1920, 80,0,0, ToRadian(0), 0, 1, 0);
-   
+    debug::setString("right_ground%d", right_ground);
+    debug::setString("left_ground%d", left_ground);
+
 }
 
 void player_moveY()
 {
     
     //重力
-    if(!right_ground&&!left_ground)
+    if (!right_ground && !left_ground)
+    {
         player.speed.y += GRAVITY;
+    }
 
   //--------------------------------------------------------------
   // 右太もも
@@ -367,16 +359,7 @@ void player_moveX()
     //右足を前に動かす処理
     if (STATE(0) & PAD_LEFT && !(STATE(0) & PAD_RIGHT)) 
     {
-        if (scrollValue>750)
-        {
-            scrollValue -= 2;
-            scroll_position_X -= 2;
-            boal.pos.x -= 2;
-            for (int i = 0; i < 9; i++)
-            {
-                goal[i].pos.x -= 2;
-            }
-        }
+        
         //移動処理
         scrollValue += 2;
         scroll_position_X += 2;
@@ -389,6 +372,17 @@ void player_moveX()
         
         //回転速度
         player_angle2 += 1.0f;
+
+        if (scrollValue > 750)
+        {
+            scrollValue -= 2;
+            scroll_position_X -= 2;
+            boal.pos.x -= 2;
+            for (int i = 0; i < 9; i++)
+            {
+                goal[i].pos.x -= 2;
+            }
+        }
 
         //右足を前にする限界値
         if (player_angle2 > 40.0f) 
@@ -527,8 +521,6 @@ void player_moveX()
     //左足を後ろに動かす処理
     if (STATE(0) & PAD_R3 && !(STATE(0) & PAD_L3))
     {
-        //移動処理
-        scrollValue += 2;
         //回転速度
         player_angle4 -= 1.0f;
 

@@ -43,16 +43,17 @@ int APIENTRY wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int) {
 				title_deinit();
 				break;
 
+			case SCENE_TUTORIAL:
+				tutorial_deinit();
+				break;
+
+
 			case SCENE_GAME:
 				game_deinit();
 				break;
 
 			case SCENE_RESULT:
 				result_deinit();
-				break;
-
-			case SCENE_TUTORIAL:
-				tutorial_deinit();
 				break;
 
 			}
@@ -132,6 +133,7 @@ int APIENTRY wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int) {
 	case SCENE_RESULT:
 		result_deinit();
 		break;
+
 	}
 
 	//ゲームライブラリの終了処理

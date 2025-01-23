@@ -30,15 +30,18 @@ void title_update() {
 		//////// ƒpƒ‰ƒ[ƒ^‚Ìİ’è ////////
 		GameLib::setBlendMode(Blender::BS_ALPHA);
 		music::play(0);
+		music::setVolume(0, 0.1f);
 		music::setVolume(5, 1.0f);
 		title_state++;
 		/*fallthrough*/
 
 	case 2:
 		//////// ’Êí ////////
-		if (TRG(0) & PAD_START) {
+		if (TRG(0) & PAD_START) 
+		{
 			music::play(0, false);
-			music::play(5, true);
+			sound::play(XWB_SE, XWB_SE_KETTEI);
+
 			nextScene = SCENE_TUTORIAL;
 			music::fade(0, 1);
 			break;

@@ -38,7 +38,7 @@ void judge()
         {
             goal[i].moveAlg = -1;
             game_score();
-            music::play(5, false);
+            sound::play(XWB_SE, XWB_SE_BU);
             music::setVolume(5, 0.5f);
             music::setVolume(1, 0.2f);
             music::setVolume(3, 0.1f);
@@ -58,8 +58,7 @@ void judge()
             boal.speed.x = -25.0f;
             boal.speed.y = -30.0f;
             boal_moveX();
-            music::play(4, false);
-            music::setVolume(4, 1.5f);
+            sound::play(XWB_SE, XWB_SE_HIT);
 
         }
 
@@ -69,8 +68,7 @@ void judge()
             boal.speed.x = -20.0f;
             boal.speed.y = -50.0f;
             boal_moveX();
-            music::play(4, false);
-            music::setVolume(4, 1.5f);
+            sound::play(XWB_SE, XWB_SE_HIT);
 
         }
         if (player_angle2 < 1)
@@ -79,8 +77,7 @@ void judge()
             boal.speed.x = -30.0f;
             boal.speed.y = -70.0f;
             boal_moveX();
-            music::play(4, false);
-            music::setVolume(4, 1.5f);
+            sound::play(XWB_SE, XWB_SE_HIT);
        
         }
     }

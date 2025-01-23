@@ -9,6 +9,7 @@ Sprite* sprTutorial;
 Sprite* sprTutorial2;
 Sprite* sprTutorial3;
 Sprite* sprTutorial4;
+Sprite* sprTutorial5;
 
 void tutorial_init()
 {
@@ -32,6 +33,7 @@ void tutorial_update() {
 		sprTutorial2 = sprite_load(L"./Data/Images/Tutorial2.png");
 		sprTutorial3 = sprite_load(L"./Data/Images/Tutorial3.png");
 		sprTutorial4 = sprite_load(L"./Data/Images/Tutorial4.png");
+		sprTutorial5 = sprite_load(L"./Data/Images/™‹“ß‚ÌŒ©Ø‚è.png");
 	
 
 		tutorial_state++;
@@ -61,14 +63,9 @@ void tutorial_render()
 
 	GameLib::clear(0, 0, 0);
 	
-	if (TRG(0) & PAD_START)
+	if (TRG(0) & PAD_SELECT)
 	{
 		counter++;
-		//ƒJƒEƒ“ƒ^[‚ª‚S‚ð’´‚¦‚½‚ç‚S‚É‚·‚éif•¶
-		if (counter > 4)
-		{
-			counter == 4;
-		}
 	}
 	switch (counter)
 	{
@@ -85,7 +82,7 @@ void tutorial_render()
 		sprite_render(sprTutorial4, 0, 0);
 		break;
 	case 4:
-		sprite_render(sprTutorial4, 0, 0);
+		sprite_render(sprTutorial5, 0, 0);
 		music::play(4, false);
 		nextScene = SCENE_GAME;
 		music::fade(0, 1);

@@ -8,4 +8,4 @@ void tutorial_deinit();
 void tutorial_update();
 void tutorial_render();
 
-#endif#pragma once
+#endif

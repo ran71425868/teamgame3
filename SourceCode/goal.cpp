@@ -142,7 +142,7 @@ void goal_update()
             boal_deinit();
         }
 
-        if (STATE(0) & PAD_START)
+        if (STATE(0) & PAD_SELECT)
         {
             scrollValue = scroll_position_X;
 
@@ -157,6 +157,7 @@ void goal_update()
             goal[2].pos.x = -1420 + scroll_position_X;
             goal[5].pos.x = -1420 + scroll_position_X;
             goal[8].pos.x = -1420 + scroll_position_X;
+
             player_state = 0;
             goal[9].moveAlg = 9;
         }

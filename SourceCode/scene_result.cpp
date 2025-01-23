@@ -41,10 +41,10 @@ void result_update() {
 		/*fallthrough*/
 
 	case 2:
-		if (TRG(0) & PAD_START) {
+	/*	if (TRG(0) & PAD_START) {
 			nextScene = SCENE_TITLE;
 			break;
-		}
+		}*/
 		break;
 	}
 	result_timer++;
