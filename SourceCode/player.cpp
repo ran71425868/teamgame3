@@ -484,9 +484,9 @@ void player_moveX()
         player_angle4 += 1.0f;
 
         //¶‘«‚ğ‘O‚É‚·‚éŒÀŠE’l
-        if (player_angle4 > 60.0f) 
+        if (player_angle4 > 40.0f) 
         {
-            player_angle4 = 60.0f;
+            player_angle4 = 40.0f;
             //ˆÚ“®’â~
             scrollValue -= 2;
             scroll_position_X -= 2;
@@ -538,8 +538,8 @@ void player_moveX()
         player_angle4 -= 1.0f;
 
         //¶‘«‚ğŒã‚ë‚É‚·‚éŒÀŠE’l
-        if (player_angle4 < -60.0f)
-            player_angle4 = -60.0f;
+        if (player_angle4 < -90.0f)
+            player_angle4 = -90.0f;
 
         //•G‚É‘«‚ªH‚¢‚Ü‚È‚¢ˆ—
         if (player_angle3 >= 90)

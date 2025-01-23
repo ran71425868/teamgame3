@@ -43,15 +43,19 @@ void judge()
             music::setVolume(1, 0.2f);
             music::setVolume(3, 0.1f);
 
-            /*if (goal[i].moveAlg == -1) {
+            if (   goal[0].moveAlg == -1 && goal[1].moveAlg == -1 && goal[2].moveAlg == -1
+                && goal[3].moveAlg == -1 && goal[4].moveAlg == -1 && goal[5].moveAlg == -1
+                && goal[6].moveAlg == -1 && goal[7].moveAlg == -1 && goal[8].moveAlg == -1)
+            {
                 game_clear();
-            }*/
+            }
         }
     }
 
     //É{Å[ÉãÇ∆ë´
     if (hitCheck(&boal, &goal[9]))
     {
+
         if (player_angle2 < 60)
         {
 
