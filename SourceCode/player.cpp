@@ -367,6 +367,16 @@ void player_moveX()
     //‰E‘«‚ð‘O‚É“®‚©‚·ˆ—
     if (STATE(0) & PAD_LEFT && !(STATE(0) & PAD_RIGHT)) 
     {
+        if (scrollValue>750)
+        {
+            scrollValue -= 2;
+            scroll_position_X -= 2;
+            boal.pos.x -= 2;
+            for (int i = 0; i < 9; i++)
+            {
+                goal[i].pos.x -= 2;
+            }
+        }
         //ˆÚ“®ˆ—
         scrollValue += 2;
         scroll_position_X += 2;

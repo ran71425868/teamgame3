@@ -11,6 +11,7 @@ int boalCount;
 extern OBJ2D goal[GOAL_MAX];
 
 extern float scrollValue;
+extern float scroll_position_X;
 extern float player_angle2;
 
 //OBJ2Då^ÇÃïœêîboalÇêÈåæ
@@ -60,7 +61,7 @@ void boal_update()
         //playerÇÃÉpÉâÉÅÅ[É^ê›íË
         boal = {};
         boal.timer = 0;
-        boal.pos = {0, GROUND_Y - 30};
+        boal.pos = {scroll_position_X, GROUND_Y - 30};
         boal.scale = { 0.5f,0.5f };
         boal.texPos = { 0,0 };
         boal.texSize = { BOAL_TEX_W ,BOAL_TEX_H };
@@ -91,6 +92,8 @@ void boal_update()
             boalground = true;
         }
 
+
+        
         
         break;
     }
@@ -107,9 +110,9 @@ void boal_render()
         boal.pivot.x, boal.pivot.y,
         ToRadian(0), boal.color.x, boal.color.y);
     
-    primitive::circle(boal.pos,
+   /* primitive::circle(boal.pos,
         boal.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f }
-    );
+    );*/
     debug::setString("boalflug%d", boalflug);
     debug::setString("boalCount%d", boalCount);
    
@@ -131,8 +134,6 @@ void boal_moveX()
 void boal_moveY()
 {
     boal.speed.y += GRAVITY;
-    
-
 }
 
 

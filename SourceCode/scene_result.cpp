@@ -52,9 +52,9 @@ void result_update() {
 
 void result_render() {
 	GameLib::clear(0, 0, 2);
-	sprite_render(sprResult, 0, 0, 1, 1);
+	/*sprite_render(sprResult, 0, 0, 1, 1);
 	sprite_render(sprScore, 700, 100, 2, 2);
-	sprite_render(sprGame_clear, 640, 50);
+	sprite_render(sprGame_clear, 640, 50);*/
 
 	text_out(0, std::to_string(score), 900, 300, 3, 3, 1, 1, 1, 1);
 

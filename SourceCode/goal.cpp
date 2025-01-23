@@ -139,7 +139,7 @@ void goal_update()
 
             player_deinit();
             goal[9].moveAlg = -1;
-            boal.moveAlg = -1;
+            boal_deinit();
         }
 
         if (STATE(0) & PAD_START)
