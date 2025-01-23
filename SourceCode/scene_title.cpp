@@ -11,7 +11,7 @@ void title_init() {
 	title_timer = 0;
 }
 void title_deinit() {
-	music::stop(2);
+	music::stop(0);
 
 }
 void title_update() {
@@ -30,15 +30,17 @@ void title_update() {
 		//////// パラメータの設定 ////////
 		GameLib::setBlendMode(Blender::BS_ALPHA);
 		music::play(0);
-		music::setVolume(2, 0.5f);
+		music::setVolume(5, 1.0f);
 		title_state++;
 		/*fallthrough*/
 
 	case 2:
 		//////// 通常時 ////////
 		if (TRG(0) & PAD_START) {
-			music::play(4, false);
+			music::play(0, false);
+			music::play(5, true);
 			nextScene = SCENE_TUTORIAL;
+			music::fade(0, 1);
 			break;
 		}
 
@@ -53,7 +55,9 @@ void title_render() {
 	GameLib::clear(0, 0, 0);
 
 	sprite_render(sprTitle, 0, 0);
-
+	//タイトル
+	GameLib::text_out(5, "EXCITING SOCCER", 1800, 100, 3.5f, 3.5f, 1, 1, 1, 1, TEXT_ALIGN::UPPER_RIGHT);
+	GameLib::text_out(5, "EXCITING SOCCER", 1800, 100, 3.6f, 3.6f, 0, 0, 0, 1, TEXT_ALIGN::UPPER_RIGHT);
 	if (title_timer / 32 % 2 == 1) {
 		sprite_render(sprTitle_Push, 300, 800, 2.0f, 2.0f);
 	}
