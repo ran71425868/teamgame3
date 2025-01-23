@@ -6,6 +6,14 @@ extern OBJ2D boal;
 
 int shoot=0;
 
+extern int player_state;
+extern int boal_state;
+extern int boalflug;
+extern int boalCount;
+extern int boal_timer;
+extern float power;
+
+
 extern float scrollValue;
 extern float scroll_position_X;
 extern float player_angle2;
@@ -75,12 +83,19 @@ void judge()
         goal[5].pos.x = scrollValue - scrollValue + 500;
         goal[8].pos.x = scrollValue - scrollValue + 500;
 
-        if (player_angle2 < 60)
+        if (player_angle2 < 40)
         {
 
             boal.speed.x = -25.0f;
-            boal.speed.y = -30.0f;
-            boal_moveX();
+            boal.speed.y = -30.0f*power;
+            sound::play(XWB_SE, XWB_SE_HIT);
+
+        }
+        if (player_angle2 < 20)
+        {
+
+            boal.speed.x = -25.0f;
+            boal.speed.y = -20.0f * power;
             sound::play(XWB_SE, XWB_SE_HIT);
 
         }

@@ -1,13 +1,16 @@
 #include "all.h"
-
+#include	<stdlib.h>
+#include	<time.h>
 
 int boal_state;
 int boal_timer;
-float speed;
+
 bool boalground;
 
 int boalflug;
 int boalCount;
+int rnd;
+float power;
 
 extern OBJ2D goal[GOAL_MAX];
 
@@ -30,9 +33,12 @@ void boal_init()
     boal_state = 0;
     boal_timer = 0;
 
-    speed = 0;
-    boalflug = 3;
-    boalCount = 3;
+    boalflug = 2;
+    boalCount = 5;
+    rnd = 0;
+    power = 0;
+
+    
 }
 //--------------------------------------
 //  プレイヤーの終了処理
@@ -74,13 +80,35 @@ void boal_update()
         boal.radius = 34.0f;
         boal.offset = { 0,0 };
 
-       
+        rnd = rand() % 5;
 
         ++boal_state;
         /*fallthrough*/
 
     case 2:
         //////// 通常時 ////////
+
+        
+        
+        switch (rnd)
+        {
+        case 0:
+            power = 1;
+            break;
+        case 1:
+            power = 1.1;
+            break;
+        case 2:
+            power = 1.2;
+            break;
+        case 3:
+            power = 1.3;
+            break;
+        case 4:
+            power = 1.35;
+            break;
+        }
+
 
         //player_moveX・Yを呼ぶ
         boal_moveY();
@@ -94,6 +122,55 @@ void boal_update()
             boal.speed.y = 0.0f;
             boal.pos.y = 970;
             boalground = true;
+        }
+
+        if (boal.speed.x < 0)
+        {
+            if (boal_timer % 100 == 0)
+            {
+                if (boalflug > 0)
+                {
+                    boalflug--;
+
+                }
+                else if (boalflug <= 0)
+                {
+                    scrollValue = 0;
+                    scroll_position_X = 0;
+
+                    goal[0].pos.x = -1820 + scroll_position_X;
+                    goal[3].pos.x = -1820 + scroll_position_X;
+                    goal[6].pos.x = -1820 + scroll_position_X;
+
+                    goal[1].pos.x = -1620 + scroll_position_X;
+                    goal[4].pos.x = -1620 + scroll_position_X;
+                    goal[7].pos.x = -1620 + scroll_position_X;
+
+                    goal[2].pos.x = -1420 + scroll_position_X;
+                    goal[5].pos.x = -1420 + scroll_position_X;
+                    goal[8].pos.x = -1420 + scroll_position_X;
+
+                    //scrollValue = -scroll_position_X;
+                    
+                    player_state = 0;
+                    boal_state = 0;
+
+                    if (boalCount > 0)
+                    {
+                        boalCount--;
+                    }
+                        boalflug = 2;
+                    
+                }
+               
+
+            }
+        }
+
+
+        if (boalCount == 0)
+        {
+            game_clear();
         }
 
         boal_timer++;
@@ -117,41 +194,12 @@ void boal_render()
    /* primitive::circle(boal.pos,
         boal.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f }
     );*/
-    debug::setString("boaltimer%d", boal_timer);
-
-    debug::setString("boalflug%d", boalflug);
-    debug::setString("boalCount%d", boalCount);
+    
+    text_out(0, "power *", 1400, 150, 2, 2);
+    text_out(0, std::to_string(power), 1700, 150, 2, 2);
+    text_out(0, "boll *", 1500, 50, 2, 2);
+    text_out(0, std::to_string(boalCount), 1700, 50, 2, 2);
    
-}
-void boal_moveX()
-{
-    if (boal_timer % 100 == 0)
-    {
-        if (boalflug > 0)
-        {
-            boalflug--;
-
-        }
-
-        if (boalflug <= 0)
-        {
-            player_state = 0;
-            boal_state = 0;
-
-            if (boalCount > 0)
-                boalCount--;
-        }
-        else
-        {
-            boalflug = 3;
-        }
-        
-    }
-
-    if (boalCount == 0)
-    {
-        game_clear();
-    }
 }
 
 void boal_moveY()

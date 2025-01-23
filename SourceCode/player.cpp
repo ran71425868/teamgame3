@@ -292,10 +292,6 @@ void player_moveY()
         //右太ももを上に動かす限界値
         if (player_angle > 90.0f)
             player_angle = 90.0f;
-
-        //太ももが足に食い込まない処理
-        if (player_angle2 < 0)
-            player_angle = 0;
         
     }
 
@@ -338,7 +334,7 @@ void player_moveY()
             }
 
             //移動停止
-            if (scrollValue > 750)
+            if (scrollValue > 770)
             {
                 scrollValue -= 2;
                 scroll_position_X -= 2;
@@ -365,10 +361,6 @@ void player_moveY()
         //左太ももを上に動かす限界値
         if (player_angle3 > 90.0f)
             player_angle3 = 90.0f;
-
-        //太ももが足に食い込まない処理
-        if (player_angle4 < 0)
-            player_angle3 = 0;
     }
 
     //左太ももを下に動かす処理
@@ -410,7 +402,7 @@ void player_moveY()
             }
 
             //移動停止
-            if (scrollValue > 750)
+            if (scrollValue > 770)
             {
                 scrollValue -= 2;
                 scroll_position_X -= 2;

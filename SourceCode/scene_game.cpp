@@ -115,8 +115,8 @@ void game_render() {
 	boal_render();
 	
 
-	text_out(0, "score", 1700, 450, 2, 2);
-	text_out(0, std::to_string(score), 1700, 500, 2, 2);
+	text_out(0, "score", 1700, 550, 2, 2);
+	text_out(0, std::to_string(score), 1700, 600, 2, 2);
 }
 void game_score()
 {

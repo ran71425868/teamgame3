@@ -22,7 +22,7 @@ void result_update() {
 	switch (result_state) {
 	case 0:
 		////////èâä˙ê›íË////////
-		sprResult = sprite_load(L"./Data/Images/result_1.png");
+		sprResult = sprite_load(L"./Data/Images/map01.png");
 		sprScore = sprite_load(L"./Data/Images/Score.png");
 		sprGame_clear = sprite_load(L"./Data/Images/Congratulations.png");
 
@@ -35,8 +35,7 @@ void result_update() {
 		GameLib::setBlendMode(Blender::BS_ALPHA);
 		sound::play(XWB_SYSTEM, XWB_SYSTEM_DONPATU);
 
-		music::play(8);
-		music::setVolume(8, 0.5f);
+		
 		result_state++;
 		/*fallthrough*/
 
@@ -52,13 +51,13 @@ void result_update() {
 
 void result_render() {
 	GameLib::clear(0, 0, 2);
-	/*sprite_render(sprResult, 0, 0, 1, 1);
-	sprite_render(sprScore, 700, 100, 2, 2);
-	sprite_render(sprGame_clear, 640, 50);*/
+	sprite_render(sprResult, 0, 0, 1, 1);
+	sprite_render(sprScore, 700, 400, 2, 2);
+	sprite_render(sprGame_clear, 640, 50);
 
-	text_out(0, std::to_string(score), 900, 300, 3, 3, 1, 1, 1, 1);
+	text_out(0, std::to_string(score), 800, 600, 3, 3, 1, 1, 1, 1);
 
 	if (result_timer / 32 % 2 == 1) {
-		text_out(4, "Push Enter Key", 700, 500, 2, 2, 1, 1, 1);
+		text_out(4, "Push Enter Key", 600, 900, 2, 2, 1, 1, 1);
 	}
 }
