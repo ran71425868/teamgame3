@@ -158,7 +158,13 @@ void player_update()
            right_ground = true;
            player.speed.y = 0.0f;
 
-           player_angle3;
+           
+           
+           if (!left_ground && right_ground)
+           {
+               player_angle = 0;
+               player_angle2 = 0;
+           }
 
            
        }
@@ -174,6 +180,13 @@ void player_update()
          
            left_ground = true;
            player.speed.y = 0.0f;
+
+           
+           if (!right_ground && left_ground)
+           {
+               player_angle3 = 0;
+               player_angle4 = 0;
+           }
 
        }
 
