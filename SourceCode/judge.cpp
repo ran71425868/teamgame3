@@ -4,6 +4,7 @@ extern OBJ2D player;
 extern OBJ2D goal[GOAL_MAX];
 extern OBJ2D boal;
 
+extern float scrollValue;
 extern float player_angle2;
 
 //“–‚½‚è”»’è
@@ -42,9 +43,9 @@ void judge()
             music::setVolume(1, 0.2f);
             music::setVolume(3, 0.1f);
 
-            if (goal[i].moveAlg == -1) {
-                nextScene = SCENE_RESULT;
-            }
+            /*if (goal[i].moveAlg == -1) {
+                game_clear();
+            }*/
         }
     }
 
