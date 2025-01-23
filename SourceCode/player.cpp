@@ -31,6 +31,7 @@ float left_footY;
 float scroll_position_X;
 
 extern float scrollValue;
+extern int shoot;
 
 //OBJ2Då^ÇÃïœêîplayerÇêÈåæ
 OBJ2D player;
@@ -319,6 +320,36 @@ void player_moveY()
             }
         }
 
+        if (right_ground && player_angle > 30)
+        {
+            player_angle4 -= 1.0f;
+        }
+
+        if (player_angle2 >= 10 && player_angle >= 30)
+        {
+            //à⁄ìÆèàóù
+            scrollValue += 2;
+            scroll_position_X += 2;
+            boal.pos.x += 2;
+
+            for (int i = 0; i < 9; i++)
+            {
+                goal[i].pos.x += 2;
+            }
+
+            //à⁄ìÆí‚é~
+            if (scrollValue > 750)
+            {
+                scrollValue -= 2;
+                scroll_position_X -= 2;
+                boal.pos.x -= 2;
+                for (int i = 0; i < 9; i++)
+                {
+                    goal[i].pos.x -= 2;
+                }
+            }
+        }
+
     }
 
    //--------------------------------------------------------------
@@ -360,6 +391,36 @@ void player_moveY()
                 player_angle4 += 1.0f;
             }
         }
+
+        if (left_ground && player_angle3 >=30)
+        {
+            player_angle2 -= 1.0f;
+        }
+
+        if (player_angle4 >= 10 && player_angle3 >= 30)
+        {
+            //à⁄ìÆèàóù
+            scrollValue += 2;
+            scroll_position_X += 2;
+            boal.pos.x += 2;
+
+            for (int i = 0; i < 9; i++)
+            {
+                goal[i].pos.x += 2;
+            }
+
+            //à⁄ìÆí‚é~
+            if (scrollValue > 750)
+            {
+                scrollValue -= 2;
+                scroll_position_X -= 2;
+                boal.pos.x -= 2;
+                for (int i = 0; i < 9; i++)
+                {
+                    goal[i].pos.x -= 2;
+                }
+            }
+        }
     }
 }
 
@@ -372,59 +433,19 @@ void player_moveX()
     //âEë´ÇëOÇ…ìÆÇ©Ç∑èàóù
     if (STATE(0) & PAD_LEFT && !(STATE(0) & PAD_RIGHT)) 
     {
-        
-        //à⁄ìÆèàóù
-        scrollValue += 2;
-        scroll_position_X += 2;
-        boal.pos.x += 2;
-
-        for (int i = 0; i < 9; i++)
-        {
-            goal[i].pos.x += 2;
-        }
-        
         //âÒì]ë¨ìx
         player_angle2 += 1.0f;
-
-        if (scrollValue > 750)
-        {
-            scrollValue -= 2;
-            scroll_position_X -= 2;
-            boal.pos.x -= 2;
-            for (int i = 0; i < 9; i++)
-            {
-                goal[i].pos.x -= 2;
-            }
-        }
 
         //âEë´ÇëOÇ…Ç∑ÇÈå¿äEíl
         if (player_angle2 > 40.0f) 
         {
             player_angle2 = 40.0f;
-            //à⁄ìÆí‚é~
-            scrollValue -= 2;
-            scroll_position_X -= 2;
-            boal.pos.x -= 2;
-
-            for (int i = 0; i < 9; i++)
-            {
-                goal[i].pos.x -= 2;
-            }
         }
 
         //ïGÇÃâ¬ìÆàÊÇí¥Ç¶Ç»Ç¢èàóù
         if (player_angle <= 40.0f && player_angle2 > 0)
         {
             player_angle2 -= 1.0f;
-            //à⁄ìÆí‚é~
-            scrollValue -= 2;
-            scroll_position_X -= 2;
-            boal.pos.x -= 2;
-
-            for (int i = 0; i < 9; i++)
-            {
-                goal[i].pos.x -= 2;
-            }
         }
            
         if (scrollValue > 1920)
@@ -471,15 +492,6 @@ void player_moveX()
     //ç∂ë´ÇëOÇ…ìÆÇ©Ç∑èàóù
     if (STATE(0) & PAD_L3 && !(STATE(0) & PAD_R3))
     {
-        //à⁄ìÆèàóù
-        scrollValue += 2;
-        scroll_position_X += 2;
-        boal.pos.x += 2;
-
-        for (int i = 0; i < 9; i++)
-        {
-            goal[i].pos.x += 2;
-        }
         //âÒì]ë¨ìx
         player_angle4 += 1.0f;
 
@@ -487,30 +499,12 @@ void player_moveX()
         if (player_angle4 > 40.0f) 
         {
             player_angle4 = 40.0f;
-            //à⁄ìÆí‚é~
-            scrollValue -= 2;
-            scroll_position_X -= 2;
-            boal.pos.x -= 2;
-
-            for (int i = 0; i < 9; i++)
-            {
-                goal[i].pos.x -= 2;
-            }
         }
 
         //ïGÇÃâ¬ìÆàÊÇí¥Ç¶Ç»Ç¢èàóù
         if (player_angle3 <= 40.0f && player_angle4 > 0)
         {
             player_angle4 -= 1.0f;
-            //à⁄ìÆí‚é~
-            scrollValue -= 2;
-            scroll_position_X -= 2;
-            boal.pos.x -= 2;
-
-            for (int i = 0; i < 9; i++)
-            {
-                goal[i].pos.x -= 2;
-            }
         }
 
         if (scrollValue > 1920)

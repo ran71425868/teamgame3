@@ -63,7 +63,7 @@ void tutorial_render()
 
 	GameLib::clear(0, 0, 0);
 	
-	if (TRG(0) & PAD_SELECT)
+	if (TRG(0) & PAD_START)
 	{
 		counter++;
 	}

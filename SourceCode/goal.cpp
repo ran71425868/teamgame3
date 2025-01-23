@@ -160,6 +160,7 @@ void goal_update()
 
             player_state = 0;
             goal[9].moveAlg = 9;
+            boal_init();
         }
 
 

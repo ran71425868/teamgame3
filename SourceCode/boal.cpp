@@ -2,6 +2,7 @@
 
 
 int boal_state;
+int boal_timer;
 float speed;
 bool boalground;
 
@@ -10,6 +11,7 @@ int boalCount;
 
 extern OBJ2D goal[GOAL_MAX];
 
+extern int player_state;
 extern float scrollValue;
 extern float scroll_position_X;
 extern float player_angle2;
@@ -26,8 +28,10 @@ void boal_init()
 {
     //boal_state‚ð0
     boal_state = 0;
+    boal_timer = 0;
+
     speed = 0;
-    boalflug = 0;
+    boalflug = 3;
     boalCount = 3;
 }
 //--------------------------------------
@@ -92,7 +96,7 @@ void boal_update()
             boalground = true;
         }
 
-
+        boal_timer++;
         
         
         break;
@@ -113,21 +117,40 @@ void boal_render()
    /* primitive::circle(boal.pos,
         boal.radius, { 1, 1 }, ToRadian(0), { 1, 0, 0, 0.2f }
     );*/
+    debug::setString("boaltimer%d", boal_timer);
+
     debug::setString("boalflug%d", boalflug);
     debug::setString("boalCount%d", boalCount);
    
 }
 void boal_moveX()
 {
-    boalflug = 1;
-    /*if (boal.pos.y >= 970)
+    if (boal_timer % 100 == 0)
     {
-        if (boalCount > 0)
-            boalCount -= 1;
-    }*/
-    if (boalflug > 0 && boal.pos.y >= 970)
+        if (boalflug > 0)
+        {
+            boalflug--;
+
+        }
+
+        if (boalflug <= 0)
+        {
+            player_state = 0;
+            boal_state = 0;
+
+            if (boalCount > 0)
+                boalCount--;
+        }
+        else
+        {
+            boalflug = 3;
+        }
+        
+    }
+
+    if (boalCount == 0)
     {
-        boal.speed.x = 0.0f;
+        game_clear();
     }
 }
 

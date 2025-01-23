@@ -4,7 +4,10 @@ extern OBJ2D player;
 extern OBJ2D goal[GOAL_MAX];
 extern OBJ2D boal;
 
+int shoot=0;
+
 extern float scrollValue;
+extern float scroll_position_X;
 extern float player_angle2;
 
 //ìñÇΩÇËîªíË
@@ -55,6 +58,22 @@ void judge()
     //É{Å[ÉãÇ∆ë´
     if (hitCheck(&boal, &goal[9]))
     {
+        shoot = 1;
+        player.pos.x = 1920;
+        scrollValue = 1920;
+        boal.pos.x =1720 ;
+
+        goal[0].pos.x = scrollValue - scrollValue + 100;
+        goal[3].pos.x = scrollValue - scrollValue + 100;
+        goal[6].pos.x = scrollValue - scrollValue + 100;
+
+        goal[1].pos.x = scrollValue - scrollValue + 300;
+        goal[4].pos.x = scrollValue - scrollValue + 300;
+        goal[7].pos.x = scrollValue - scrollValue + 300;
+
+        goal[2].pos.x = scrollValue - scrollValue + 500;
+        goal[5].pos.x = scrollValue - scrollValue + 500;
+        goal[8].pos.x = scrollValue - scrollValue + 500;
 
         if (player_angle2 < 60)
         {
@@ -66,24 +85,6 @@ void judge()
 
         }
 
-        if (player_angle2 < 30)
-        {
-
-            boal.speed.x = -20.0f;
-            boal.speed.y = -50.0f;
-            boal_moveX();
-            sound::play(XWB_SE, XWB_SE_HIT);
-
-        }
-        if (player_angle2 < 1)
-        {
-
-            boal.speed.x = -30.0f;
-            boal.speed.y = -70.0f;
-            boal_moveX();
-            sound::play(XWB_SE, XWB_SE_HIT);
-       
-        }
     }
    
 }
