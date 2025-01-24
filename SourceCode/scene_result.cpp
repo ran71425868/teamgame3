@@ -8,6 +8,7 @@ Sprite* sprScore;
 Sprite* sprGame_clear;
 
 extern int score;
+extern int title;
 
 void result_init() {
 	result_state = 0;
@@ -45,6 +46,7 @@ void result_update() {
 	case 2:
 		if (TRG(0) & PAD_START) {
 			nextScene = SCENE_TITLE;
+			title = 0;
 			break;
 		}
 		break;

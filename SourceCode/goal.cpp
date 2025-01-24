@@ -1,8 +1,11 @@
 #include "all.h"
 
 int goal_state;
+int boalCount;
+int rnd;
 
 extern int player_state;
+extern int boal_state;
 
 extern float player_angle;
 extern float player_angle2;
@@ -63,6 +66,9 @@ void goal_init()
 {
     //goal_state‚ð0
     goal_state = 0;
+    boalCount = 5;
+
+    rnd = 0;
 }
 
 //--------------------------------------
@@ -114,6 +120,8 @@ void goal_update()
             if (!p) break;
         }
 
+        rnd = rand() % 5;
+
         ++goal_state;
         /*fallthrough*/
 
@@ -136,7 +144,7 @@ void goal_update()
             goal[8].pos.x = scrollValue - scrollValue + 500;
 
             player_deinit();
-            safe_delete(goal[9].spr);
+            goal[9].moveAlg = -1;
             boal_deinit();
         }
 
@@ -157,8 +165,8 @@ void goal_update()
             goal[8].pos.x = -1420 + scroll_position_X;
 
             player_state = 0;
-            goal_state=0;
-            boal_init();
+            goal[9].moveAlg = 9;
+            boal_state=0;
         }
 
 
@@ -230,16 +238,21 @@ void goal_render()
             goal[i].color.z, goal[i].color.w);
 
     }
-    sprite_render(
-        goal[9].spr,
-        goal[9].pos.x, goal[9].pos.y,
-        goal[9].scale.x, goal[9].scale.y,
-        goal[9].texPos.x, goal[9].texPos.y,
-        goal[9].texSize.x, goal[9].texSize.y,
-        goal[9].pivot.x, goal[9].pivot.y,
-        ToRadian(player_angle2),
-        goal[9].color.x, goal[9].color.y,
-        goal[9].color.z, goal[9].color.w);
+    for (int i = 9; i < 10; i++) 
+    {
+        if (goal[i].moveAlg == -1)continue;
+        sprite_render(
+            goal[i].spr,
+            goal[i].pos.x, goal[i].pos.y,
+            goal[i].scale.x, goal[i].scale.y,
+            goal[i].texPos.x, goal[i].texPos.y,
+            goal[i].texSize.x, goal[i].texSize.y,
+            goal[i].pivot.x, goal[i].pivot.y,
+            ToRadian(player_angle2),
+            goal[i].color.x, goal[i].color.y,
+            goal[i].color.z, goal[i].color.w);
+    }
+    
 }
 
 void setGoal0(OBJ2D* obj)

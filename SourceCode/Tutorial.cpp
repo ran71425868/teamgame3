@@ -43,7 +43,7 @@ void tutorial_update() {
 		//////// ƒpƒ‰ƒ[ƒ^‚Ìİ’è ////////
 		GameLib::setBlendMode(Blender::BS_ALPHA);
 		music::play(0,false);
-		music::setVolume(2, 0.5f);
+		music::setVolume(2, 0.2f);
 		tutorial_state++;
 		/*fallthrough*/
 

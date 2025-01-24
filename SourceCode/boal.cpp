@@ -8,8 +8,7 @@ int boal_timer;
 bool boalground;
 
 int boalflug;
-int boalCount;
-int rnd;
+
 float power;
 
 extern OBJ2D goal[GOAL_MAX];
@@ -18,6 +17,8 @@ extern int player_state;
 extern float scrollValue;
 extern float scroll_position_X;
 extern float player_angle2;
+extern int boalCount;
+extern int rnd;
 
 //OBJ2DŒ^‚Ì•Ï”boal‚ğéŒ¾
 OBJ2D boal;
@@ -34,8 +35,6 @@ void boal_init()
     boal_timer = 0;
 
     boalflug = 2;
-    boalCount = 5;
-    rnd = 0;
     power = 0;
 
     
@@ -80,7 +79,7 @@ void boal_update()
         boal.radius = 34.0f;
         boal.offset = { 0,0 };
 
-        rnd = rand() % 5;
+        
 
         ++boal_state;
         /*fallthrough*/
