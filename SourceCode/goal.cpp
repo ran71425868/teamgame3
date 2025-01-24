@@ -120,8 +120,8 @@ void goal_update()
             if (!p) break;
         }
 
-        rnd = rand() % 5;
 
+        
         ++goal_state;
         /*fallthrough*/
 

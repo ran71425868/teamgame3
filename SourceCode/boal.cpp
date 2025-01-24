@@ -79,7 +79,7 @@ void boal_update()
         boal.radius = 34.0f;
         boal.offset = { 0,0 };
 
-        
+        rnd = rand() % 5;
 
         ++boal_state;
         /*fallthrough*/
